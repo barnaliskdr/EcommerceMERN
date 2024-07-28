@@ -1,0 +1,17 @@
+.homeAccordian {
+    .accordion-button {
+      position: relative;
+      display: flex;
+      align-items: center;
+      width: 100%;
+      padding: var(--bs-accordion-btn-padding-y) var(--bs-accordion-btn-padding-x);
+      font-size: 1rem;
+      color: var(--bs-accordion-btn-color);
+      text-align: left;
+      background-color: #b4eded !important;
+      border: solid #a07da4 !important;
+      border-radius: 0;
+      overflow-anchor: none;
+      transition: var(--bs-accordion-transition);
+    }
+  }

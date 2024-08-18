@@ -1,15 +1,38 @@
+
 import logo from './logo.svg';
 import './App.css';
 import HomePage from './pages/HomePage';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import { Navigate,useRoutes } from 'react-router-dom';
+import { BrowserRouter , Route, Routes } from 'react-router-dom';
+import NotFound from './pages/NotFound';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
 
 function App() {
+  const AppRoutes =()=>
+  {
+    const routes = [
+      { path: "/login", element: <Login/>},
+      { path: "/", element: <HomePage /> },
+      {path: "/signup", element: <Signup /> },
+      // { path: "*", element: <NotFound /> } // wildcard route for 404 page
+    ];
+  
+    // useRoutes returns element corresponding to the matched route
+    const element = useRoutes(routes);
+  
+    return element;
+  }
   return (
     <div className="App">
+      <BrowserRouter>
       <Header/>
-      <HomePage/>
+      {/* <HomePage/> */}
+      <AppRoutes/>
       <Footer/>
+      </BrowserRouter>
     </div>
   );
 }

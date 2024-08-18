@@ -103,13 +103,15 @@ import Card from 'react-bootstrap/Card';
 import { Container, Button } from 'react-bootstrap';
 import './Cards.scss';
 import Singleproduct from './Singleproduct';
-import { Mockdata } from '../Mockdata';
+// import { Mockdata } from '../Mockdata';
+import { useGetProductsQuery } from '../slices/productsApiSlice';
 import Rating from './Rating';
 
 const Cards = ({ productType }) => {
   const [visible, setVisible] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [products, setProducts] = useState([]);
+  const [productData, setProductData] = useState([]); 
+  const {data: products, isloading, isError} = useGetProductsQuery(); //reduxtoolkit
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 4;
 
@@ -118,11 +120,21 @@ const Cards = ({ productType }) => {
     setVisible(true);
   };
 
+  // useEffect(() => {
+  //   console.log("Hii products",products);
+  //   setProductData(products);
+  // }, []);
+
   useEffect(() => {
-    setProducts(Mockdata);
-  }, []);
+    if (products) {
+      console.log('Fetched products:', products);
+    }
+  }, [products]); 
 
   const specifyTypes = (productType) => {
+
+    if (!products) return [];
+
     switch (productType) {
       case 'Fruits':
         return products.filter((product) => product.category === 'Fruits');

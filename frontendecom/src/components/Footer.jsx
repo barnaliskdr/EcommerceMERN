@@ -5,7 +5,8 @@ const Footer = () => {
     const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="footer mt-auto py-3" style={{backgroundColor:"pink"}}>
+    <div class="position-relative">
+    <footer className="footer bottom-0 mt-auto py-3" style={{backgroundColor:"pink"}}>
       <Container>
         <Row>
             <Col>
@@ -16,7 +17,8 @@ const Footer = () => {
         </Row>
       </Container>
     </footer>
+    </div>
   )
 }
 
-export default Footer
+export default Footer;

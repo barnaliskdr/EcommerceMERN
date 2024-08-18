@@ -10,9 +10,12 @@ import { Mockdata } from '../Mockdata';
 import Cards from '../components/Cards';
 import Accordion from 'react-bootstrap/Accordion';
 import { Rating, ThinRoundedStar, ThinStar } from '@smastrom/react-rating';
+// import { useGetProductsQuery } from '../slices/productsApiSlice'; //reduxtoolkit
 // import { useDispatch } from 'react-redux';
 
 const HomePage = () => {
+
+  // const {data: products, isloading, isError} = useGetProductsQuery(); //reduxtoolkit
   const myStyles = {
     itemShapes: ThinStar,
     itemStrokeWidth: 2,
@@ -22,7 +25,7 @@ const HomePage = () => {
     inactiveStrokeColor: 'red'
   }
   // const dispatch = useDispatch();
-  const [products, setProducts] = useState([]);
+  //const [products, setProducts] = useState([]);
   const [fruits, setFruits] = useState([]);
   const [vegetables, setVegetables] = useState([]);
   const [dairy, setDairy] = useState([]);
@@ -56,13 +59,20 @@ const HomePage = () => {
     //   fetchProducts();
     // }, []);
 
-    useEffect(() => {
-      setProducts(Mockdata); 
-    },[])
+    // useEffect(() => {
+    //   setProducts(Mockdata); 
+    // },[])
       
   return (
     <div>
-      <Accordion className="homeAccordian" defaultActiveKey={['0', '1']}>
+      {/* {isLoading ? (
+        <div>Loading...</div>
+      ) : (
+        <div>
+          <h1>Home Page</h1>
+        </div>
+      )} */}
+      <Accordion className="homeAccordian" defaultActiveKey={['0', '1', '2', '3']}>
         <Accordion.Item eventKey="0">
           <Accordion.Header>Fruits</Accordion.Header>
           <Accordion.Body>

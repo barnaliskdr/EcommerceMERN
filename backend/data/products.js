@@ -1,4 +1,4 @@
-export const Mockdata = [
+const products = [
     {
       "id": 1,
       "name": "Organic Apples",
@@ -551,3 +551,4 @@ export const Mockdata = [
     }
   ]
   
+export default products;

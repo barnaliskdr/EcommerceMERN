@@ -15,6 +15,7 @@ const Signup = () => {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [confirmPasswordError, setConfirmPasswordError] = useState("");
     const [error, setError] = useState("");
+    const [buttonDisable, setButtonDisable] = useState(true);
     const navigate = useNavigate();
 
     const handleEmail = (e) => {
@@ -54,7 +55,12 @@ const Signup = () => {
 
       if( error === "" && confirmPasswordError === "") {
         console.log("Success");
+        console.log("Button is disabled:", buttonDisable);
         navigate("/login");
+      }
+      else
+      {
+        setButtonDisable(false);
       }
     }
 
@@ -108,7 +114,7 @@ const Signup = () => {
         value = {confirmPassword}
       />
       <div className="text-danger m-4">{error ? "Please Fill All the mandetory fields" : "" }</div>
-      <Button className="d-flex m-4 end-0 justify-content-end" variant="primary" onClick={(e) => handleSignup(e)}>Signup</Button>
+      <Button className="d-flex m-4 end-0 justify-content-end" variant="primary" disabled={!!error || !!confirmPasswordError} onClick={(e) => handleSignup(e)}>Signup</Button>
       </Form>
     </div>
   )

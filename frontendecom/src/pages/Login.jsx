@@ -8,7 +8,7 @@ import "./Login.scss";
 const Login = () => {
    const navigate = useNavigate();
   const handleLogin = (e) => {
-    navigate("/home");
+    navigate("/");
   }
 
   return (

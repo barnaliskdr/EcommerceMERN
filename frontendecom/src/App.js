@@ -10,6 +10,7 @@ import NotFound from './pages/NotFound';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import SearchedProducts from './pages/SearchedProducts';
+import Cart from './pages/Cart';
 
 function App() {
   const AppRoutes =()=>
@@ -20,6 +21,7 @@ function App() {
       {path: "/signup", element: <Signup /> },
       { path: "/404", element: <NotFound /> },
       { path: "/products/:name", element: <SearchedProducts /> },
+      { path: "/cart", element: <Cart/> },
       // { path: "*", element: <NotFound /> } // wildcard route for 404 page
     ];
   

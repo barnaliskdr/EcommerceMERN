@@ -8,13 +8,19 @@ import Singleproduct from '../components/Singleproduct';
 import "./HomePage.scss";
 import { Mockdata } from '../Mockdata';
 import Cards from '../components/Cards';
+import { useSelector } from 'react-redux';
 import Accordion from 'react-bootstrap/Accordion';
 import { Rating, ThinRoundedStar, ThinStar } from '@smastrom/react-rating';
 // import { useGetProductsQuery } from '../slices/productsApiSlice'; //reduxtoolkit
 // import { useDispatch } from 'react-redux';
 
 const HomePage = () => {
-
+  const cart = useSelector((state) => state.cart.cartProducts);
+  const quantity = useSelector((state) => state.cart.cartTotalQuantity);
+  const price = useSelector((state) => state.cart.cartTotalPrice);
+  console.log("Current cart state:", cart);
+  console.log("Current quantity state:", quantity);
+  console.log("Current price state:", price);
   // const {data: products, isloading, isError} = useGetProductsQuery(); //reduxtoolkit
   const myStyles = {
     itemShapes: ThinStar,

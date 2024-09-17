@@ -6,6 +6,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import {FaShoppingCart,FaUser} from 'react-icons/fa';
+import { FaHome } from "react-icons/fa";
 import logo from '../assets/logo.png';
 import { Form, FormControl, Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
@@ -60,6 +61,9 @@ const Header = () => {
         <Navbar.Collapse id="basic-navbar-nav">
         
           <Nav className="ms-auto">
+          <Nav.Link href="/">
+              <FaHome/>Home
+            </Nav.Link>
             <Nav.Link href="/cart">
                 <FaShoppingCart/>cart
             </Nav.Link>

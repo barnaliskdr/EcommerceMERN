@@ -4,7 +4,9 @@ import Button from 'react-bootstrap/Button';
 import Loginpage from '../assets/loginpage.png';
 import coverpage from '../assets/coverpage.png';
 import { useState } from 'react';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import "./Login.scss";
 
 const Signup = () => {
@@ -56,6 +58,21 @@ const Signup = () => {
       if( error === "" && confirmPasswordError === "") {
         console.log("Success");
         console.log("Button is disabled:", buttonDisable);
+        try
+        {
+          console.log("inside try block of signup");
+          axios.post("http://localhost:5000/api/auth/register", {
+            name: name,
+            email: email,
+            phone: phone,
+            password: password
+          })
+        }
+        catch(err)
+        {
+          console.log(err);
+        }
+        
         navigate("/login");
       }
       else
@@ -70,7 +87,7 @@ const Signup = () => {
         <img src={Loginpage} alt="milkyway" style={{width:"100%", height:"100%"}} />
       </div>
     <Form classname="p-4" style={{border:"1px solid black", borderColor:"black",padding: "4rem",paddingBottom:"2rem", paddingRight:"6rem"}}>
-    <h1 className="translate-middle-y ">Signup</h1>
+    <h1 className="translate-middle-y text-center">Signup</h1>
       <Form.Control
         type="email"
         placeholder="Email Address"
@@ -115,6 +132,9 @@ const Signup = () => {
       />
       <div className="text-danger m-4">{error ? "Please Fill All the mandetory fields" : "" }</div>
       <Button className="d-flex m-4 end-0 justify-content-end" variant="primary" disabled={!!error || !!confirmPasswordError} onClick={(e) => handleSignup(e)}>Signup</Button>
+      <Link to="/login" style={{ textDecoration: 'underline', color: '#007bff' }}>
+          Already have an account? Login here
+      </Link>
       </Form>
     </div>
   )

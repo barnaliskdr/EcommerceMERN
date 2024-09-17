@@ -4,19 +4,20 @@ const products = [
       "price": 3.99,
       "description": "Fresh and organic apples, perfect for a healthy snack. 250g per unit.",
       "image": "https://www.orgpick.com/cdn/shop/articles/Apple_1024x1024.jpg?v=1547124407",
-      "quantity": "1000kg",
+      "quantityInStock": "1000kg",
+      "portion": "250g",
       "category": "Fruits",
       "rating": 3.5,
       "brand": "Nature's Best"
     },
     {
-      "id": 2,
       "name": "Whole Wheat Bread",
       "price": 2.49,
       "description": "Whole wheat bread with no added preservatives.300g(per packet)",
       "image": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fsallysbakingaddiction.com%2Fwhole-wheat-bread%2F&psig=AOvVaw3Z1GuM143dazA94AwLuiKb&ust=1722186267630000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCLCPyvjZx4cDFQAAAAAdAAAAABAQ",
-      "quantity": "200 packets",
+      "quantityInStock": "200 packets",
       "category": "Bakery",
+      "portion": "300g",
       "rating": 4.7,
       "brand": "Baker's Delight"
     },
@@ -28,7 +29,9 @@ const products = [
       "quantity": "200l",
       "category": "Dairy Alternatives",
       "rating": 4.6,
-      "brand": "Almond Dream"
+      "brand": "Almond Dream",
+      "quantityInStock": "400L", 
+      "portion": "1L"
     },
     {
       "name": "Brown Rice",
@@ -38,17 +41,21 @@ const products = [
       "quantity": "2000kg",
       "category": "Grains",
       "rating": 4.4,
-      "brand": "Healthy Grains"
+      "brand": "Healthy Grains",
+      "quantityInStock": "4000kg",
+      "portion": "1kg"
     },
     {
-      "name": "Greek Yogurt",
+      "name": "Butter",
       "price": 1.29,
-      "description": "Rich and creamy Greek yogurt with live cultures.250gm per purchase.",
+      "description": "Rich and creamy Butter with live cultures.250gm per purchase.",
       "image": "https://example.com/images/greek_yogurt.jpg",
       "quantity": "45kg",
       "category": "Dairy",
       "rating": 4.6,
-      "brand": "Yogurtland"
+      "brand": "Yogurtland",
+      "quantityInStock": "180kg",
+      "portion": "250g"
     },
     {
       "name": "Spinach",
@@ -58,7 +65,9 @@ const products = [
       "quantity": "40kg",
       "category": "Vegetables",
       "rating": 4.7,
-      "brand": "Green Leaf"
+      "brand": "Green Leaf",
+      "quantityInStock": "160kg",
+      "portion": "250g"
     },
     {
       "id": 8,
@@ -69,7 +78,9 @@ const products = [
       "quantity": 22,
       "category": "Condiments",
       "rating": 4.5,
-      "brand": "Nutty Spread"
+      "brand": "Nutty Spread",
+      "quantityInStock": "300kg",
+      "portion": "500g"
     },
     {
       "id": 9,
@@ -80,7 +91,9 @@ const products = [
       "quantity": 14,
       "category": "Dairy",
       "rating": 4.8,
-      "brand": "Happy Hens"
+      "brand": "Happy Hens",
+      "quantityInStock": "14*12",
+      "portion": "Dozen"
     },
     {
       "id": 10,
@@ -89,9 +102,11 @@ const products = [
       "description": "Creamy and nutritious avocados, great for salads and sandwiches.",
       "image": "https://img.freepik.com/premium-photo/green-goodness-ripe-avocado-nutrientrich-super-vegan-food-delicious-healthy-creations_926199-943180.jpg",
       "quantity": 28,
-      category: "Fruits",
+      "category": "Fruits",
       "rating": 4.7,
-      "brand": "Green Goodness"
+      "brand": "Green Goodness",
+      "quantityInStock": "28",
+      "portion": "20g"
     },
     {
       "id": 11,
@@ -102,7 +117,9 @@ const products = [
       "quantity": 35,
       "category": "Sauces",
       "rating": 4.3,
-      "brand": "Sauce Supreme"
+      "brand": "Sauce Supreme",
+      "quantityInStock": 35,
+      "portion": "500ml"
     },
     {
       "id": 12,
@@ -113,7 +130,9 @@ const products = [
       "quantity": 16,
       "category": "Grains",
       "rating": 4.6,
-      "brand": "Healthy Harvest"
+      "brand": "Healthy Harvest",
+      "quantityInStock": 16,
+      "portion": "500g"
     },
     {
       "id": 13,
@@ -124,7 +143,9 @@ const products = [
       "quantity": 27,
       "category": "Frozen",
       "rating": 4.8,
-      "brand": "Berry Bliss"
+      "brand": "Berry Bliss",
+      "quantityInStock": 27,
+      "portion": "500g"
     },
     {
       "id": 14,
@@ -135,7 +156,9 @@ const products = [
       "quantity": 12,
       "category": "Oils",
       "rating": 4.7,
-      "brand": "Tropical Treasures"
+      "brand": "Tropical Treasures",
+      "quantityInStock": 12,
+      "portion": "500ml"
     },
     {
       "id": 15,
@@ -146,7 +169,9 @@ const products = [
       "quantity": 20,
       "category": "Vegetables",
       "rating": 4.6,
-      "brand": "Nature's Best"
+      "brand": "Nature's Best",
+      "quantityInStock": 20,
+      "portion": "1kg"
     },
     {
       "id": 16,
@@ -157,7 +182,9 @@ const products = [
       "quantity": 30,
       "category": "Grains",
       "rating": 4.5,
-      "brand": "Morning Fresh"
+      "brand": "Morning Fresh",
+      "quantityInStock": 30,
+      "portion": "500g"
     },
     {
       "id": 17,
@@ -168,7 +195,9 @@ const products = [
       "quantity": 25,
       "category": "Vegetables",
       "rating": 4.4,
-      "brand": "Green Leaf"
+      "brand": "Green Leaf",
+      "quantityInStock": 25,
+      "portion": "150g"
     },
     {
       "id": 18,
@@ -179,304 +208,360 @@ const products = [
       "quantity": 18,
       "category": "Pasta",
       "rating": 4.6,
-      "brand": "Pasta Perfection"
+      "brand": "Pasta Perfection",
+      "quantityInStock": 18,
+      "portion": "500g"
     },
     {
       "id": 19,
       "name": "Chia Seeds",
       "price": 6.49,
-      "description": "Nutritious chia seeds, great for adding to smoothies and yogurt.",
+      "description": "Nutritious chia seeds, great for smoothies and salads.",
       "image": "https://example.com/images/chia_seeds.jpg",
-      "quantity": 14,
+      "quantity": 22,
       "category": "Seeds",
       "rating": 4.7,
-      "brand": "Super Foods"
+      "brand": "Super Seeds",
+      "quantityInStock": 22,
+      "portion": "250g"
     },
     {
       "id": 20,
-      "name": "Maple Syrup",
-      "price": 7.99,
-      "description": "Pure maple syrup, perfect for pancakes and waffles.",
-      "image": "https://example.com/images/maple_syrup.jpg",
-      "quantity": 8,
-      "category": "Sweeteners",
+      "name": "Hummus",
+      "price": 3.29,
+      "description": "Creamy hummus, perfect for dipping and spreading.",
+      "image": "https://example.com/images/hummus.jpg",
+      "quantity": 15,
+      "category": "Dips",
       "rating": 4.8,
-      "brand": "Sweet Harvest"
+      "brand": "Hummus Haven",
+      "quantityInStock": 15,
+      "portion": "250g"
     },
     {
       "id": 21,
-      "name": "Garlic Powder",
-      "price": 1.79,
-      "description": "Garlic powder, a versatile seasoning for various dishes.",
-      "image": "https://example.com/images/garlic_powder.jpg",
-      "quantity": 40,
-      "category": "Spices",
+      "name": "Bell Peppers",
+      "price": 3.99,
+      "description": "Fresh bell peppers, perfect for salads and stir-fries.",
+      "image": "https://example.com/images/bell_peppers.jpg",
+      "quantity": 22,
+      "category": "Vegetables",
       "rating": 4.5,
-      "brand": "Flavorful Spices"
+      "brand": "Veggie Delight",
+      "quantityInStock": 22,
+      "portion": "50g"
     },
     {
       "id": 22,
-      "name": "Dried Lentils",
-      "price": 3.29,
-      "description": "Nutritious dried lentils, ideal for soups and stews.",
-      "image": "https://example.com/images/dried_lentils.jpg",
-      "quantity": 22,
-      "category": "Legumes",
-      "rating": 4.6,
-      "brand": "Harvest Beans"
+      "name": "Almond Butter",
+      "price": 4.49,
+      "description": "Creamy almond butter, great for spreading and baking.",
+      "image": "https://example.com/images/almond_butter.jpg",
+      "quantity": 14,
+      "category": "Condiments",
+      "rating": 4.7,
+      "brand": "Nutty Naturals",
+      "quantityInStock": 14,
+      "portion": "250g"
     },
     {
       "id": 23,
-      "name": "Canned Tuna",
-      "price": 2.49,
-      "description": "Canned tuna in olive oil, great for quick meals.",
-      "image": "https://example.com/images/canned_tuna.jpg",
+      "name": "Apple Cider Vinegar",
+      "price": 3.79,
+      "description": "Raw apple cider vinegar, ideal for dressings and health benefits.",
+      "image": "https://example.com/images/apple_cider_vinegar.jpg",
       "quantity": 25,
-      "category": "Canned Goods",
-      "rating": 4.4,
-      "brand": "Ocean's Bounty"
+      "category": "Condiments",
+      "rating": 4.6,
+      "brand": "Nature's Best",
+      "quantityInStock": 25,
+      "portion": "500ml"
     },
     {
       "id": 24,
-      "name": "Olive Oil",
-      "price": 5.79,
-      "description": "Extra virgin olive oil, perfect for cooking and dressings.",
-      "image": "https://example.com/images/olive_oil.jpg",
-      "quantity": 10,
-      "category": "Oils",
-      "rating": 4.7,
-      "brand": "Mediterranean Essentials"
+      "name": "Whole Wheat Flour",
+      "price": 2.49,
+      "description": "Nutritious whole wheat flour for baking and cooking.",
+      "image": "https://example.com/images/whole_wheat_flour.jpg",
+      "quantity": 30,
+      "category": "Baking",
+      "rating": 4.4,
+      "brand": "Baker's Choice",
+      "quantityInStock": 30,
+      "portion": "1kg"
     },
     {
       "id": 25,
-      "name": "Granola Bars",
-      "price": 4.49,
-      "description": "Healthy granola bars, great for a quick snack.",
-      "image": "https://example.com/images/granola_bars.jpg",
-      "quantity": 30,
-      "category": "Snacks",
-      "rating": 4.6,
-      "brand": "Snack Attack"
+      "name": "Sweet Potatoes",
+      "price": 2.99,
+      "description": "Fresh sweet potatoes, perfect for roasting and mashing.",
+      "image": "https://example.com/images/sweet_potatoes.jpg",
+      "quantity": 18,
+      "category": "Vegetables",
+      "rating": 4.7,
+      "brand": "Harvest Time",
+      "quantityInStock": 18,
+      "portion": "1kg"
     },
     {
       "id": 26,
       "name": "Coconut Water",
-      "price": 2.89,
-      "description": "Refreshing coconut water, ideal for hydration.",
+      "price": 2.49,
+      "description": "Refreshing coconut water, great for hydration.",
       "image": "https://example.com/images/coconut_water.jpg",
-      "quantity": 16,
+      "quantity": 28,
       "category": "Beverages",
       "rating": 4.5,
-      "brand": "Tropical Treats"
+      "brand": "Tropical Refresh",
+      "quantityInStock": 28,
+      "portion": "500ml"
     },
     {
       "id": 27,
-      "name": "Tomato Paste",
-      "price": 1.99,
-      "description": "Concentrated tomato paste, essential for sauces.",
-      "image": "https://example.com/images/tomato_paste.jpg",
-      "quantity": 28,
-      "category": "Sauces",
-      "rating": 4.4,
-      "brand": "Sauce Master"
+      "name": "Mixed Nuts",
+      "price": 5.99,
+      "description": "A mix of crunchy and flavorful nuts, ideal for snacks.",
+      "image": "https://example.com/images/mixed_nuts.jpg",
+      "quantity": 20,
+      "category": "Snacks",
+      "rating": 4.8,
+      "brand": "Nut Mix",
+      "quantityInStock": 20,
+      "portion": "250g"
     },
     {
       "id": 28,
-      "name": "Sweet Potatoes",
-      "price": 2.79,
-      "description": "Nutritious sweet potatoes, ideal for roasting and baking.",
-      "image": "https://th.bing.com/th/id/OIP.X_CL9U4vuQ_8toa1Vn2lSQHaE8?rs=1&pid=ImgDetMain",
-      "quantity": 18,
-      "category": "Vegetables",
-      "rating": 4.6,
-      "brand": "Root Harvest"
+      "name": "Maple Syrup",
+      "price": 6.99,
+      "description": "Pure maple syrup, perfect for pancakes and waffles.",
+      "image": "https://example.com/images/maple_syrup.jpg",
+      "quantity": 10,
+      "category": "Condiments",
+      "rating": 4.9,
+      "brand": "Syrup Delight",
+      "quantityInStock": 10,
+      "portion": "250ml"
     },
     {
       "id": 29,
+      "name": "Edamame Beans",
+      "price": 3.29,
+      "description": "Frozen edamame beans, great for snacks and salads.",
+      "image": "https://example.com/images/edamame_beans.jpg",
+      "quantity": 25,
+      "category": "Frozen",
+      "rating": 4.6,
+      "brand": "Green Harvest",
+      "quantityInStock": 25,
+      "portion": "500g"
+    },
+    {
+      "id": 30,
+      "name": "Cashew Nuts",
+      "price": 4.99,
+      "description": "Roasted cashew nuts, perfect for snacking and cooking.",
+      "image": "https://example.com/images/cashew_nuts.jpg",
+      "quantity": 15,
+      "category": "Snacks",
+      "rating": 4.7,
+      "brand": "Nutty Delights",
+      "quantityInStock": 15,
+      "portion": "250g"
+    },
+    {
+      "id": 31,
+      "name": "Organic Olive Oil",
+      "price": 7.99,
+      "description": "High-quality organic olive oil, ideal for cooking and dressing.",
+      "image": "https://example.com/images/organic_olive_oil.jpg",
+      "quantity": 12,
+      "category": "Oils",
+      "rating": 4.8,
+      "brand": "Pure Olive",
+      "quantityInStock": 12,
+      "portion": "500ml"
+    },
+    {
+      "id": 32,
+      "name": "Black Beans",
+      "price": 1.99,
+      "description": "Canned black beans, perfect for salads and stews.",
+      "image": "https://example.com/images/black_beans.jpg",
+      "quantity": 40,
+      "category": "Canned Goods",
+      "rating": 4.5,
+      "brand": "Bean Town",
+      "quantityInStock": 40,
+      "portion": "400g"
+    },
+    {
+      "id": 33,
+      "name": "Whole Grain Bread",
+      "price": 2.79,
+      "description": "Nutritious whole grain bread, ideal for sandwiches and toasts.",
+      "image": "https://example.com/images/whole_grain_bread.jpg",
+      "quantity": 22,
+      "category": "Bakery",
+      "rating": 4.6,
+      "brand": "Bread Basket",
+      "quantityInStock": 22,
+      "portion": "Loaf"
+    },
+    {
+      "id": 34,
+      "name": "Almond Flour",
+      "price": 5.49,
+      "description": "Finely ground almond flour, perfect for baking and cooking.",
+      "image": "https://example.com/images/almond_flour.jpg",
+      "quantity": 18,
+      "category": "Baking",
+      "rating": 4.7,
+      "brand": "Nut Flour",
+      "quantityInStock": 18,
+      "portion": "500g"
+    },
+    {
+      "id": 35,
       "name": "Soy Sauce",
-      "price": 2.59,
-      "description": "Savory soy sauce, perfect for Asian dishes.",
+      "price": 2.49,
+      "description": "Savory soy sauce, ideal for Asian dishes.",
       "image": "https://example.com/images/soy_sauce.jpg",
       "quantity": 30,
       "category": "Condiments",
       "rating": 4.5,
-      "brand": "Asian Flavors"
-    },
-    {
-      "id": 30,
-      "name": "Whole Wheat Crackers",
-      "price": 3.29,
-      "description": "Crunchy whole wheat crackers, great for snacking.",
-      "image": "https://example.com/images/whole_wheat_crackers.jpg",
-      "quantity": 20,
-      "category": "Snacks",
-      "rating": 4.6,
-      "brand": "Crunchy Bites"
-    },
-    {
-      "id": 31,
-      "name": "Rice Cakes",
-      "price": 2.99,
-      "description": "Light and crispy rice cakes, perfect for a light snack.",
-      "image": "https://example.com/images/rice_cakes.jpg",
-      "quantity": 15,
-      "category": "Snacks",
-      "rating": 4.4,
-      "brand": "Healthy Munch"
-    },
-    {
-      "id": 32,
-      "name": "Dark Chocolate",
-      "price": 3.99,
-      "description": "Rich dark chocolate with a high cocoa content.",
-      "image": "https://example.com/images/dark_chocolate.jpg",
-      "quantity": 10,
-      "category": "Confectionery",
-      "rating": 4.8,
-      "brand": "Choco Delight"
-    },
-    {
-      "id": 33,
-      "name": "Green Tea",
-      "price": 4.49,
-      "description": "Refreshing green tea, great for relaxation.",
-      "image": "https://example.com/images/green_tea.jpg",
-      "quantity": 25,
-      "category": "Beverages",
-      "rating": 4.7,
-      "brand": "Tea Time"
-    },
-    {
-      "id": 34,
-      "name": "Canned Beans",
-      "price": 1.89,
-      "description": "Canned beans, great for quick and easy meals.",
-      "image": "https://example.com/images/canned_beans.jpg",
-      "quantity": 30,
-      "category": "Canned Goods",
-      "rating": 4.3,
-      "brand": "Bean Harvest"
-    },
-    {
-      "id": 35,
-      "name": "Almond Flour",
-      "price": 6.29,
-      "description": "Finely ground almond flour, ideal for baking.",
-      "image": "https://example.com/images/almond_flour.jpg",
-      "quantity": 12,
-      "category": "Baking",
-      "rating": 4.6,
-      "brand": "Nutty Bakers"
+      "brand": "Asian Flavor",
+      "quantityInStock": 30,
+      "portion": "500ml"
     },
     {
       "id": 36,
-      "name": "Hummus",
-      "price": 3.49,
-      "description": "Creamy and flavorful hummus, great with pita and veggies.",
-      "image": "https://example.com/images/hummus.jpg",
-      "quantity": 18,
-      "category": "Dips",
-      "rating": 4.7,
-      "brand": "Mediterranean Delights"
+      "name": "Rice Cakes",
+      "price": 3.19,
+      "description": "Crunchy rice cakes, great for snacks and toppings.",
+      "image": "https://example.com/images/rice_cakes.jpg",
+      "quantity": 25,
+      "category": "Snacks",
+      "rating": 4.4,
+      "brand": "Snack Time",
+      "quantityInStock": 25,
+      "portion": "100g"
     },
     {
       "id": 37,
-      "name": "Apple Cider Vinegar",
-      "price": 3.79,
-      "description": "Organic apple cider vinegar, great for dressings and health.",
-      "image": "https://example.com/images/apple_cider_vinegar.jpg",
-      "quantity": 15,
-      "category": "Condiments",
-      "rating": 4.5,
-      "brand": "Pure Nature"
+      "name": "Granola Bars",
+      "price": 4.29,
+      "description": "Healthy granola bars, ideal for a quick snack or breakfast.",
+      "image": "https://example.com/images/granola_bars.jpg",
+      "quantity": 20,
+      "category": "Snacks",
+      "rating": 4.7,
+      "brand": "Granola Goodness",
+      "quantityInStock": 20,
+      "portion": "6 Bars"
     },
     {
       "id": 38,
-      "name": "Peaches",
-      "price": 2.99,
-      "description": "Juicy peaches, perfect for snacking or desserts.",
-      "image": "https://img.freepik.com/premium-photo/illustration-freshly-peaches-peach-tree_1034098-463.jpg",
-      "quantity": 25,
-      "category": "Fruits",
+      "name": "Sunflower Seeds",
+      "price": 3.29,
+      "description": "Nutritious sunflower seeds, great for salads and snacking.",
+      "image": "https://example.com/images/sunflower_seeds.jpg",
+      "quantity": 22,
+      "category": "Seeds",
       "rating": 4.6,
-      "brand": "Fresh Harvest"
+      "brand": "Seed Co.",
+      "quantityInStock": 22,
+      "portion": "250g"
     },
     {
       "id": 39,
-      "name": "Pita Bread",
-      "price": 2.49,
-      "description": "Soft pita bread, perfect for sandwiches and wraps.",
-      "image": "https://example.com/images/pita_bread.jpg",
-      "quantity": 22,
-      "category": "Bakery",
-      "rating": 4.4,
-      "brand": "Baker's Choice"
+      "name": "Greek Yogurt",
+      "price": 4.49,
+      "description": "Creamy Greek yogurt, perfect for breakfast or snacks.",
+      "image": "https://example.com/images/greek_yogurt.jpg",
+      "quantity": 18,
+      "category": "Dairy",
+      "rating": 4.8,
+      "brand": "Yogurt Delight",
+      "quantityInStock": 18,
+      "portion": "500g"
     },
     {
       "id": 40,
-      "name": "Black Beans",
-      "price": 1.79,
-      "description": "Canned black beans, ideal for various dishes.",
-      "image": "https://example.com/images/black_beans.jpg",
+      "name": "Spaghetti",
+      "price": 1.99,
+      "description": "Classic spaghetti, ideal for a variety of pasta dishes.",
+      "image": "https://example.com/images/spaghetti.jpg",
       "quantity": 30,
-      "category": "Canned Goods",
+      "category": "Pasta",
       "rating": 4.5,
-      "brand": "Beanery"
+      "brand": "Pasta Perfect",
+      "quantityInStock": 30,
+      "portion": "500g"
     },
     {
       "id": 41,
-      "name": "Cabbage",
-      "price": 1.89,
-      "description": "Fresh cabbage, great for salads and stir-fries.",
-      "image": "https://example.com/images/cabbage.jpg",
-      "quantity": 20,
-      "category": "Vegetables",
-      "rating": 4.4,
-      "brand": "Green Farms"
+      "name": "Frozen Berries",
+      "price": 4.99,
+      "description": "Mixed frozen berries, great for smoothies and desserts.",
+      "image": "https://example.com/images/frozen_berries.jpg",
+      "quantity": 22,
+      "category": "Frozen",
+      "rating": 4.8,
+      "brand": "Berry Bliss",
+      "quantityInStock": 22,
+      "portion": "300g"
     },
     {
       "id": 42,
-      "name": "Cashew Nuts",
-      "price": 5.49,
-      "description": "Roasted cashew nuts, perfect for snacking.",
-      "image": "https://example.com/images/cashew_nuts.jpg",
-      "quantity": 14,
-      "category": "Nuts",
-      "rating": 4.6,
-      "brand": "Nut Haven"
+      "name": "Tomato",
+      "price": 1.99,
+      "description": "Fresh Tomato, perfect for salads and snacks.",
+      "image": "https://example.com/images/tomato.jpg",
+      "quantity": 30,
+      "category": "Vegetables",
+      "rating": 4.4,
+      "brand": "Veggie Delight",
+      "quantityInStock": 30,
+      "portion": "50g"
     },
     {
       "id": 43,
-      "name": "Pancake Mix",
-      "price": 4.19,
-      "description": "Easy-to-make pancake mix for a quick breakfast.",
-      "image": "https://example.com/images/pancake_mix.jpg",
-      "quantity": 25,
-      "category": "Baking",
-      "rating": 4.5,
-      "brand": "Morning Magic"
+      "name": "Balsamic Vinegar",
+      "price": 3.49,
+      "description": "Rich balsamic vinegar, ideal for dressings and marinades.",
+      "image": "https://example.com/images/balsamic_vinegar.jpg",
+      "quantity": 20,
+      "category": "Condiments",
+      "rating": 4.7,
+      "brand": "Vinegar House",
+      "quantityInStock": 20,
+      "portion": "500ml"
     },
     {
       "id": 44,
-      "name": "Kale",
-      "price": 2.99,
-      "description": "Fresh kale, ideal for salads and smoothies.",
-      "image": "https://example.com/images/kale.jpg",
-      "quantity": 18,
-      "category": "Vegetables",
+      "name": "Quinoa",
+      "price": 4.79,
+      "description": "Nutritious quinoa, perfect as a side dish or in salads.",
+      "image": "https://example.com/images/quinoa.jpg",
+      "quantity": 25,
+      "category": "Grains",
       "rating": 4.6,
-      "brand": "Green Leaf"
+      "brand": "Healthy Grains",
+      "quantityInStock": 25,
+      "portion": "500g"
     },
     {
       "id": 45,
-      "name": "Soy Milk",
+      "name": "Dark Chocolate",
       "price": 2.99,
-      "description": "Creamy soy milk, ideal for lactose-free diets.",
-      "image": "https://example.com/images/soy_milk.jpg",
+      "description": "Rich dark chocolate, ideal for a sweet treat.",
+      "image": "https://example.com/images/dark_chocolate.jpg",
       "quantity": 20,
-      "category": "Dairy Alternatives",
-      "rating": 4.5,
-      "brand": "Soy Life"
+      "category": "Snacks",
+      "rating": 4.8,
+      "brand": "Choco Delight",
+      "quantityInStock": 20,
+      "portion": "100g"
     },
     {
       "id": 46,
@@ -487,7 +572,9 @@ const products = [
       "quantity": 22,
       "category": "Vegetables",
       "rating": 4.6,
-      "brand": "Spice World"
+      "brand": "Spice World",
+      "quantityInStock": 25,
+      "portion": "20g"
     },
     {
       "id": 47,
@@ -498,7 +585,9 @@ const products = [
       "quantity": 30,
       "category": "Sweeteners",
       "rating": 4.4,
-      "brand": "Sweet Life"
+      "brand": "Sweet Life",
+      "quantityInStock": 25,
+      "portion": "50g"
     },
     {
       "id": 48,
@@ -509,7 +598,9 @@ const products = [
       "quantity": 12,
       "category": "Oils",
       "rating": 4.7,
-      "brand": "Green Oil"
+      "brand": "Green Oil",
+      "quantityInStock": 25,
+      "portion": "50ml"
     },
     {
       "id": 49,
@@ -520,7 +611,9 @@ const products = [
       "quantity": 25,
       "category": "Sauces",
       "rating": 4.6,
-      "brand": "Grill Master"
+      "brand": "Grill Master",
+      "quantityInStock": 25,
+      "portion": "50ml"
     },
     {
       "id": 50,
@@ -531,7 +624,9 @@ const products = [
       "quantity": 20,
       "category": "Beverages",
       "rating": 4.5,
-      "brand": "Fruit Splash"
+      "brand": "Fruit Splash",
+      "quantityInStock": 25,
+      "portion": "100ml"
     }
   ]
   

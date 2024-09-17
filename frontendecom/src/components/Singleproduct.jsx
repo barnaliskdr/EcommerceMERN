@@ -8,7 +8,7 @@ const Singleproduct = (props) => {
     const productPrice = props.product.price;
     const productDescription = props.product.description;
     const productImage = props.product.image;
-    const productQuantity = props.product.quantity;
+    const portion = props.product.portion;
     const productCategory = props.product.category;
     const productRating = props.product.rating;
     const productBrand = props.product.brand;
@@ -28,7 +28,7 @@ const Singleproduct = (props) => {
            </Modal.Title>
          <Modal.Body>
            <h4>{productPrice}$</h4>
-           <p>Quantity: {productQuantity}</p>
+           <p>Portion: {portion}</p>
            <p>Description: {productDescription}</p>
            <p>seller: {productBrand}</p>
          </Modal.Body>

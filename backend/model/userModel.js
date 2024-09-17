@@ -29,6 +29,12 @@ const userSchema = new mongoose.Schema({
         required: true,
         default: false
     },
+    role:
+    {
+        type: String,
+        required: true,
+        default: 'customer'
+    }
 
 },{
     timestamps: true,
@@ -37,3 +43,42 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model('User', userSchema);
 export default User;
+
+// userSchema.pre('save',function(next)
+// {
+//     let user = this;
+//     if(user.isModified('password'))
+//     {
+//         return bcrypt.hash(user.password,12,function(err,hash)   //12 is salt
+//         {
+//             if(err)
+//             {
+//                 console.log('Bcrypt has error',err);
+//                 return next(err);
+//             }
+//             user.password = hash;
+//             return next();
+//         })	
+//     }
+//     else{
+//         return next();
+//     }
+// })
+
+// userSchema.methods.comparePassword = function(password,next){
+//     bcrypt.compare(password,this.password, function(err,match){
+//         if(err)
+//         {
+//             console.log('Bcrypt compare error',err);
+//             return next(err,false); //next is the callback function which is being called in this 
+//             //line, if there is a error...it will call the next fn with actual value i.e, err and false i.e, as the password mismatches it gives false.
+//         }
+//         else{
+//        console.log("Match Password");}
+//        return next(null, match);
+//     });
+// };
+
+
+// const User = mongoose.model('User', userSchema);
+// export default User;

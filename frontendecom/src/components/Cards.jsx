@@ -104,8 +104,11 @@ import { Container, Button } from 'react-bootstrap';
 import './Cards.scss';
 import Singleproduct from './Singleproduct';
 // import { Mockdata } from '../Mockdata';
+import { useDispatch } from 'react-redux';
 import { useGetProductsQuery } from '../slices/productsApiSlice';
+// import { useGetAddToCartQuery } from '../slices/cartSlices';
 import Rating from './Rating';
+import { addToCart, removeFromCart } from '../slices/cartSlices';
 
 const Cards = ({ productType }) => {
   const [visible, setVisible] = useState(false);
@@ -114,16 +117,22 @@ const Cards = ({ productType }) => {
   const {data: products, isloading, isError} = useGetProductsQuery(); //reduxtoolkit
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 4;
+  const dispatch = useDispatch();
 
   const viewDetailsHandle = (product) => {
     setSelectedProduct(product);
     setVisible(true);
   };
 
-  // useEffect(() => {
-  //   console.log("Hii products",products);
-  //   setProductData(products);
-  // }, []);
+  const handleAddToCart = (product) => {
+    console.log("called Add to cart",product);
+    dispatch(addToCart(product));
+  };
+
+  const handleRemoveFromCart = (product) => {
+    console.log("called Remove from cart",product);
+    dispatch(removeFromCart(product));
+  };
 
   useEffect(() => {
     if (products) {
@@ -215,9 +224,9 @@ const Cards = ({ productType }) => {
               View Details
             </Button>
             <div className="d-flex justify-content-center align-items-center w-5 h-4 bg-info text-white m-2">
-              <Button variant="outline-primary text-white">-</Button>
+              <Button variant="outline-primary text-white" onClick={() => handleRemoveFromCart(product)}>-</Button>
               <span className="px-2">Add To Cart</span>
-              <Button variant="outline-primary text-white">+</Button>
+              <Button variant="outline-primary text-white" onClick={() => handleAddToCart(product)}>+</Button>
             </div>
           </Card>
         ))}

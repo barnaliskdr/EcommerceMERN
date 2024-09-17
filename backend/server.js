@@ -4,6 +4,7 @@ import express from "express";
 import cors from 'cors';
 import connectDB from "./config/db.js";
 import productRoutes from "./routes/ProductRoutes.js";
+import UserRoutes from "./routes/UserRoutes.js";
 
 
 const port = 5000;
@@ -12,6 +13,8 @@ const app = express();
 
 
 app.use(cors());
+app.use(express.json());
+app.use('/api/auth',UserRoutes);
 app.use('/api/products',productRoutes);
 app.get("/", (req, res) => {
     res.send("Hello World!");

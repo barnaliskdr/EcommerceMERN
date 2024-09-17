@@ -58,7 +58,7 @@ const SearchedProducts = () => {
                     <h2>{product.name}</h2>
                     <div>{product.description}</div>
                     <div>{product.price}$</div>
-                    <div>Quantity: {product.quantity}</div>
+                    <div>{product.quantity}: {product.portion}</div>
                     <div>seller: {product.brandrand}</div>
                 </Card.Body>
                 <Button

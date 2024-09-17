@@ -52,11 +52,11 @@ const productSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    quantity: {
-        type: String,
-        required: true,
-        default: 0
-    },
+    // quantityInStock: {
+    //     type: String,
+    //     required: true,
+    //     default: 0
+    // },
     rating: {
         type: Number,
         required: true,

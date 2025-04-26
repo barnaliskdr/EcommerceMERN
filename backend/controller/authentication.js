@@ -112,30 +112,49 @@ export const login = async (req, res) => {
         if (!user) res.status(400).send("USER NOT FOUND");
         else{
         // Assuming comparePassword is defined as a static method in your User model
-        user.comparePassword(password, (err, match) => {
-            
-            if (!match || err) {
-                console.log("Compare Password In login error", err);
-                
+            bcrypt.compare(password, user.password, (err, resp) => {
+            if(resp)
+            {
+                const token = jsonwebtoken.sign({email:user.email,password:user.password},
+                    "jwt-secret-key",{expiresIn: "1d"});
+
+                //resp.cookie('token',token);
+                //localStorage.setItem('token',token);
+                return res.status(200).json({ status: "OK", token: token });
+
+            }
+            else
+            {
+                console.log("err",err);
                 return res.status(400).send("PASSWORD DOES NOT MATCH");
-            } else {
-                // Password matches, you can proceed with login logic
-                // For example, you might generate a token here and send it back to the client
-                let token = jsonwebtoken.sign({_id: user._id,email:user.email},process.env.JWT_SECRET,{
-                    expiresIn: "2d",    
-                })
-                //sign menthod is used to create a token with the provided secret key of the ENV variable.
-                console.log(token);
-                res.json({token,user:{
-                    name: user.name,
-                    phone: user.phone,
-                    email:user.email,
-                    createdAt: user.createdAt,
-                    updatedAt: user.updatedAt,
-                }});
-            }           
-        });
-    }   
+            }
+            })
+        }
+        
+    //     user.comparePassword(password, (err, match) => {
+            
+    //         if (!match || err) {
+    //             console.log("Compare Password In login error", err);
+                
+    //             return res.status(400).send("PASSWORD DOES NOT MATCH");
+    //         } else {
+    //             // Password matches, you can proceed with login logic
+    //             // For example, you might generate a token here and send it back to the client
+    //             let token = jsonwebtoken.sign({_id: user._id,email:user.email},process.env.JWT_SECRET,{
+    //                 expiresIn: "2d",    
+    //             })
+    //             //sign menthod is used to create a token with the provided secret key of the ENV variable.
+    //             console.log(token);
+    //             res.json({token,user:{
+    //                 name: user.name,
+    //                 phone: user.phone,
+    //                 email:user.email,
+    //                 createdAt: user.createdAt,
+    //                 updatedAt: user.updatedAt,
+    //             }});
+    //         }           
+    //     });
+       
     } catch (err) {
         console.log("LOGIN ERROR -- ", err);
         res.status(400).send("SIGNIN FAILED");

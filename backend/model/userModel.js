@@ -1,5 +1,9 @@
 import mongoose from "mongoose";
-
+const ROLES = {
+    ADMIN: 'admin',
+    MANAGER: 'manager',
+    CUSTOMER: 'customer'
+};
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -33,7 +37,8 @@ const userSchema = new mongoose.Schema({
     {
         type: String,
         required: true,
-        default: 'customer'
+        default: 'customer',
+        default: ROLES.CUSTOMER 
     }
 
 },{

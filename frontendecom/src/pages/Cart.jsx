@@ -6,6 +6,14 @@ import "../components/Cards.scss";
 // import products from '../../../backend/data/products';
 
 const Cart = () => {
+
+    const myname = "Barnali-cag";
+    // const newName = myname.
+    console.log(myname.length);
+    console.log(myname.charAt(8));
+    console.log(myname.slice(0,7));
+    console.log(myname.substring(-3,3));
+    console.log("slice[-1,1]: ",myname.slice(-3,3));
     //const cartProducts = useSelector((state)=> state.cart.cartProducts);
     const { cartProducts, cartTotalQuantity, cartTotalPrice } = useSelector((state) => state.cart);
     console.log(cartTotalQuantity);

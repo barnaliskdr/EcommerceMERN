@@ -12,7 +12,13 @@ connectDB();
 const app = express();
 
 
-app.use(cors());
+app.use(cors(
+    // {
+    //     methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    //     // origin: 'http://localhost:3000',
+    //     credentials: true
+    // }
+));
 app.use(express.json());
 app.use('/api/auth',UserRoutes);
 app.use('/api/products',productRoutes);

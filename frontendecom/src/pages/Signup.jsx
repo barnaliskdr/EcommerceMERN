@@ -65,7 +65,8 @@ const Signup = () => {
             name: name,
             email: email,
             phone: phone,
-            password: password
+            password: password,
+            role: "customer"
           })
         }
         catch(err)

@@ -1,3 +1,5 @@
+import React from 'react'
+
 import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios';
@@ -8,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import Loginpage from '../assets/loginpage.png';
 import "./Login.scss";
 
-const Login = () => {
+const Adminlogin = () => {
    const navigate = useNavigate();
    const dispatch = useDispatch();
 
@@ -81,14 +83,10 @@ const Login = () => {
         onChange = {(e) => handlePassword(e)}
       />
       <Button className="d-flex m-4 end-0 justify-content-end" variant="primary" onClick={(e) => handleLogin(e)}>Login</Button>
-      <div className="text-center mt-3">
-        <Link to="/signup" style={{ textDecoration: 'underline', color: '#007bff' }}>
-          Don't have an account? Sign up here
-        </Link>
-      </div>
       </Form>
     </div>
   )
 }
 
-export default Login;
+export default Adminlogin;
+

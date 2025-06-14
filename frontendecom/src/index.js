@@ -10,22 +10,38 @@ import {
   Route
 } from "react-router-dom";
 import App from './App';
+import HomePage from './pages/HomePage';
+import NotFound from './pages/NotFound';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
+import SearchedProducts from './pages/SearchedProducts';
+import Cart from './pages/Cart';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import store from './store';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<App />} />
+    <Route path="/" element={<App />}>
+      <Route index element={<HomePage />} />
+      <Route path="login" element={<Login />} />
+      <Route path="signup" element={<Signup />} />
+      <Route path="products/:name" element={<SearchedProducts />} />
+      <Route path="cart" element={<Cart />} />
+      <Route path="*" element={<NotFound />} />
+    </Route>
   )
-)
+);
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      {/* <App /> */}
+      <RouterProvider router={router} />
     </Provider>
   </React.StrictMode>
+
 );
 
 // If you want to start measuring performance in your app, pass a function

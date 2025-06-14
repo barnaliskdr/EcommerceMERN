@@ -8,6 +8,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import {FaShoppingCart,FaUser} from 'react-icons/fa';
 import { FaHome } from "react-icons/fa";
 import logo from '../assets/logo.png';
+import { Link } from 'react-router-dom';
 import { Form, FormControl, Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { useGetProductByNameQuery , useLazyGetProductByNameQuery } from '../slices/productsApiSlice';
@@ -64,7 +65,7 @@ const Header = () => {
           <Nav.Link href="/">
               <FaHome/>Home
             </Nav.Link>
-            <Nav.Link href="/cart">
+            <Nav.Link as={Link} to="/cart">
                 <FaShoppingCart/>cart
             </Nav.Link>
             <Nav.Link href="/login">

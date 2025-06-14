@@ -66,6 +66,10 @@ const productSchema = new mongoose.Schema({
             type: String,
             required: false
     },
+    count:{
+         type: Number,
+         required: true
+    },
     brand: {
         type: String,
         required: true

@@ -1,7 +1,7 @@
 import React, { useState,useEffect }from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
-import { useGetProductByNameQuery } from '../slices/productsApiSlice';
+// import { useGetProductByNameQuery } from '../slices/productsApiSlice';
 import Card from 'react-bootstrap/Card';
 import { Button } from 'react-bootstrap';
 import '../components/Cards.scss';
@@ -11,9 +11,10 @@ const SearchedProducts = () => {
     const navigate = useNavigate();
     const { name } = useParams();
     console.log(name);
-    const {data: searchResult, isLoading, isError, error}= useGetProductByNameQuery(name,{
-        skip: !name, // Skip the query if no name is provided
-      });
+    const [searchResult, setSearchResult] = useState([]);
+    // const {data: searchResult, isLoading, isError, error}= useGetProductByNameQuery(name,{
+    //     skip: !name, // Skip the query if no name is provided
+    //   });
 
     // useEffect(() => {
     //     if (name) {
@@ -31,23 +32,23 @@ const SearchedProducts = () => {
 
     //   if (isLoading) return <div>Loading...</div>;
     //   if (isError) return <div>Error fetching products</div>;
-    if (isLoading) {
-        return <div>Loading...</div>;
-      }
+    // if (isLoading) {
+    //     return <div>Loading...</div>;
+    //   }
     
-      if (isError) {
-        console.log(searchResult);
-        return (
-          <div>
-            {/* Error handling based on the specific error */}
-            {searchResult?.message === "Product not found" ? (
-              <p>No products found</p>
-            ) : (
-              <p>Error fetching products: {error.message}</p>
-            )}
-          </div>
-        );
-      }
+    //   if (isError) {
+    //     console.log(searchResult);
+    //     return (
+    //       <div>
+    //         {/* Error handling based on the specific error */}
+    //         {searchResult?.message === "Product not found" ? (
+    //           <p>No products found</p>
+    //         ) : (
+    //           <p>Error fetching products: {error.message}</p>
+    //         )}
+    //       </div>
+    //     );
+    //   }
   return (
     <div className="d-grid gap-4 d-flex flex-row justify-content-center flex-wrap m-3">
          {searchResult?.data && searchResult.data?.length > 0 && (

@@ -5,43 +5,31 @@ import HomePage from './pages/HomePage';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import { Navigate,useRoutes } from 'react-router-dom';
-import { BrowserRouter , Route, Routes } from 'react-router-dom';
+// import { BrowserRouter , Route, Routes } from 'react-router-dom';
 import NotFound from './pages/NotFound';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import SearchedProducts from './pages/SearchedProducts';
 import Cart from './pages/Cart';
+import { Outlet } from 'react-router-dom';
 
 function App() {
-  const AppRoutes =()=>
-  {
-    const routes = [
-      { path: "/login", element: <Login/>},
-      { path: "/", element: <HomePage /> },
-      {path: "/signup", element: <Signup /> },
-      { path: "/404", element: <NotFound /> },
-      { path: "/products/:name", element: <SearchedProducts /> },
-      { path: "/cart", element: <Cart/> },
-      // { path: "*", element: <NotFound /> } // wildcard route for 404 page
-    ];
-  
-    // useRoutes returns element corresponding to the matched route
-    const element = useRoutes(routes);
-  
-    return element;
-  }
   return (
-    <div className="App">
-      <BrowserRouter>
-      <Header/>
-      {/* <HomePage/> */}
-      <AppRoutes/>
-      <Footer/>
-      </BrowserRouter>
+    <div className="d-flex flex-column vh-100">
+      <header className="flex-shrink-0">
+        <Header />
+      </header>
+
+      <main className="flex-grow-1 overflow-auto">
+        <Outlet />
+      </main>
+
+      <footer className="flex-shrink-0">
+        <Footer />
+      </footer>
     </div>
   );
 }
-
 
 export default App;
 // export default App;

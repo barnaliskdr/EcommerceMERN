@@ -104,17 +104,20 @@ import { Container, Button } from 'react-bootstrap';
 import './Cards.scss';
 import Singleproduct from './Singleproduct';
 // import { Mockdata } from '../Mockdata';
-import { useDispatch } from 'react-redux';
-import { useGetProductsQuery } from '../slices/productsApiSlice';
+import { useDispatch, useSelector } from 'react-redux';
+// import { useGetProductsQuery } from '../slices/productsApiSlice';
 // import { useGetAddToCartQuery } from '../slices/cartSlices';
 import Rating from './Rating';
-import { addToCart, removeFromCart } from '../slices/cartSlices';
+// import { addToCart, removeFromCart } from '../slices/cartSlices';
+import { addToCart,removeFromCart } from '../actions/cartActions';
 
 const Cards = ({ productType }) => {
   const [visible, setVisible] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [productData, setProductData] = useState([]); 
-  const {data: products, isloading, isError} = useGetProductsQuery(); //reduxtoolkit
+  const [products, setProducts] = useState([]);
+  const productsAdded  = useSelector((state)=> state);
+  //const [productData, setProductData] = useState([]); 
+  //const {data: products, isloading, isError} = useGetProductsQuery(); //reduxtoolkit
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 4;
   const dispatch = useDispatch();
@@ -125,20 +128,37 @@ const Cards = ({ productType }) => {
   };
 
   const handleAddToCart = (product) => {
-    console.log("called Add to cart",product);
+    //console.log("called Add to cart",product);
+
     dispatch(addToCart(product));
   };
 
   const handleRemoveFromCart = (product) => {
-    console.log("called Remove from cart",product);
+   // console.log("called Remove from cart",product);
     dispatch(removeFromCart(product));
   };
 
-  useEffect(() => {
-    if (products) {
-      console.log('Fetched products:', products);
+  const getAllProducts = async() =>
+  {
+    try{
+        const response = await fetch('http://localhost:5000/api/products')
+        const data = await response.json(); // Await the JSON parsing
+        console.log(data); // This will show your actual products
+        setProducts(data); 
     }
-  }, [products]); 
+    catch(err)
+    {
+        console.log(err);
+    }  
+  }
+
+  useEffect(() => {
+    //dispatch(getAllProducts());
+    // if (products) {
+    //   console.log('Fetched products:', products);
+    // }
+    getAllProducts();
+  }, []); 
 
   const specifyTypes = (productType) => {
 
@@ -231,7 +251,6 @@ const Cards = ({ productType }) => {
           </Card>
         ))}
       </Container>
-
       <div className="d-flex justify-content-center my-4">
         <Button
           variant="primary"
@@ -251,7 +270,6 @@ const Cards = ({ productType }) => {
           Next
         </Button>
       </div>
-
       {selectedProduct && (
         <Singleproduct
           product={selectedProduct}

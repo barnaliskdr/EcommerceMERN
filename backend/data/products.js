@@ -8,6 +8,7 @@ const products = [
       "portion": "250g",
       "category": "Fruits",
       "rating": 3.5,
+      "count": 1,
       "brand": "Nature's Best"
     },
     {
@@ -19,6 +20,7 @@ const products = [
       "category": "Bakery",
       "portion": "300g",
       "rating": 4.7,
+      "count": 1,
       "brand": "Baker's Delight"
     },
     {
@@ -31,6 +33,7 @@ const products = [
       "rating": 4.6,
       "brand": "Almond Dream",
       "quantityInStock": "400L", 
+      "count": 1,
       "portion": "1L"
     },
     {
@@ -43,6 +46,7 @@ const products = [
       "rating": 4.4,
       "brand": "Healthy Grains",
       "quantityInStock": "4000kg",
+      "count": 1,
       "portion": "1kg"
     },
     {
@@ -55,6 +59,7 @@ const products = [
       "rating": 4.6,
       "brand": "Yogurtland",
       "quantityInStock": "180kg",
+      "count": 1,
       "portion": "250g"
     },
     {
@@ -67,6 +72,7 @@ const products = [
       "rating": 4.7,
       "brand": "Green Leaf",
       "quantityInStock": "160kg",
+      "count": 1,
       "portion": "250g"
     },
     {
@@ -80,6 +86,7 @@ const products = [
       "rating": 4.5,
       "brand": "Nutty Spread",
       "quantityInStock": "300kg",
+      "count": 1,
       "portion": "500g"
     },
     {
@@ -93,6 +100,7 @@ const products = [
       "rating": 4.8,
       "brand": "Happy Hens",
       "quantityInStock": "14*12",
+      "count": 1,
       "portion": "Dozen"
     },
     {
@@ -106,6 +114,7 @@ const products = [
       "rating": 4.7,
       "brand": "Green Goodness",
       "quantityInStock": "28",
+      "count": 1,
       "portion": "20g"
     },
     {
@@ -119,6 +128,7 @@ const products = [
       "rating": 4.3,
       "brand": "Sauce Supreme",
       "quantityInStock": 35,
+      "count": 1,
       "portion": "500ml"
     },
     {
@@ -132,6 +142,7 @@ const products = [
       "rating": 4.6,
       "brand": "Healthy Harvest",
       "quantityInStock": 16,
+      "count": 1,
       "portion": "500g"
     },
     {
@@ -145,6 +156,7 @@ const products = [
       "rating": 4.8,
       "brand": "Berry Bliss",
       "quantityInStock": 27,
+      "count": 1,
       "portion": "500g"
     },
     {
@@ -158,6 +170,7 @@ const products = [
       "rating": 4.7,
       "brand": "Tropical Treasures",
       "quantityInStock": 12,
+      "count": 1,
       "portion": "500ml"
     },
     {
@@ -171,6 +184,7 @@ const products = [
       "rating": 4.6,
       "brand": "Nature's Best",
       "quantityInStock": 20,
+      "count": 1,
       "portion": "1kg"
     },
     {
@@ -184,6 +198,7 @@ const products = [
       "rating": 4.5,
       "brand": "Morning Fresh",
       "quantityInStock": 30,
+      "count": 1,
       "portion": "500g"
     },
     {
@@ -197,6 +212,7 @@ const products = [
       "rating": 4.4,
       "brand": "Green Leaf",
       "quantityInStock": 25,
+      "count": 1,
       "portion": "150g"
     },
     {
@@ -210,6 +226,7 @@ const products = [
       "rating": 4.6,
       "brand": "Pasta Perfection",
       "quantityInStock": 18,
+      "count": 1,
       "portion": "500g"
     },
     {
@@ -223,6 +240,7 @@ const products = [
       "rating": 4.7,
       "brand": "Super Seeds",
       "quantityInStock": 22,
+      "count": 1,
       "portion": "250g"
     },
     {
@@ -236,6 +254,7 @@ const products = [
       "rating": 4.8,
       "brand": "Hummus Haven",
       "quantityInStock": 15,
+      "count": 1,
       "portion": "250g"
     },
     {
@@ -249,6 +268,7 @@ const products = [
       "rating": 4.5,
       "brand": "Veggie Delight",
       "quantityInStock": 22,
+      "count": 1,
       "portion": "50g"
     },
     {
@@ -262,6 +282,7 @@ const products = [
       "rating": 4.7,
       "brand": "Nutty Naturals",
       "quantityInStock": 14,
+      "count": 1,
       "portion": "250g"
     },
     {
@@ -275,6 +296,7 @@ const products = [
       "rating": 4.6,
       "brand": "Nature's Best",
       "quantityInStock": 25,
+      "count": 1,
       "portion": "500ml"
     },
     {
@@ -288,6 +310,7 @@ const products = [
       "rating": 4.4,
       "brand": "Baker's Choice",
       "quantityInStock": 30,
+      "count": 1,
       "portion": "1kg"
     },
     {
@@ -301,6 +324,7 @@ const products = [
       "rating": 4.7,
       "brand": "Harvest Time",
       "quantityInStock": 18,
+      "count": 1,
       "portion": "1kg"
     },
     {
@@ -314,6 +338,7 @@ const products = [
       "rating": 4.5,
       "brand": "Tropical Refresh",
       "quantityInStock": 28,
+      "count": 1,
       "portion": "500ml"
     },
     {
@@ -327,6 +352,7 @@ const products = [
       "rating": 4.8,
       "brand": "Nut Mix",
       "quantityInStock": 20,
+      "count": 1,
       "portion": "250g"
     },
     {
@@ -340,6 +366,7 @@ const products = [
       "rating": 4.9,
       "brand": "Syrup Delight",
       "quantityInStock": 10,
+      "count": 1,
       "portion": "250ml"
     },
     {
@@ -353,6 +380,7 @@ const products = [
       "rating": 4.6,
       "brand": "Green Harvest",
       "quantityInStock": 25,
+      "count": 1,
       "portion": "500g"
     },
     {
@@ -366,6 +394,7 @@ const products = [
       "rating": 4.7,
       "brand": "Nutty Delights",
       "quantityInStock": 15,
+      "count": 1,
       "portion": "250g"
     },
     {
@@ -379,6 +408,7 @@ const products = [
       "rating": 4.8,
       "brand": "Pure Olive",
       "quantityInStock": 12,
+      "count": 1,
       "portion": "500ml"
     },
     {
@@ -392,6 +422,7 @@ const products = [
       "rating": 4.5,
       "brand": "Bean Town",
       "quantityInStock": 40,
+      "count": 1,
       "portion": "400g"
     },
     {
@@ -405,6 +436,7 @@ const products = [
       "rating": 4.6,
       "brand": "Bread Basket",
       "quantityInStock": 22,
+      "count": 1,
       "portion": "Loaf"
     },
     {
@@ -418,6 +450,7 @@ const products = [
       "rating": 4.7,
       "brand": "Nut Flour",
       "quantityInStock": 18,
+      "count": 1,
       "portion": "500g"
     },
     {
@@ -431,6 +464,7 @@ const products = [
       "rating": 4.5,
       "brand": "Asian Flavor",
       "quantityInStock": 30,
+      "count": 1,
       "portion": "500ml"
     },
     {
@@ -444,6 +478,7 @@ const products = [
       "rating": 4.4,
       "brand": "Snack Time",
       "quantityInStock": 25,
+      "count": 1,
       "portion": "100g"
     },
     {
@@ -457,6 +492,7 @@ const products = [
       "rating": 4.7,
       "brand": "Granola Goodness",
       "quantityInStock": 20,
+      "count": 1,
       "portion": "6 Bars"
     },
     {
@@ -470,6 +506,7 @@ const products = [
       "rating": 4.6,
       "brand": "Seed Co.",
       "quantityInStock": 22,
+      "count": 1,
       "portion": "250g"
     },
     {
@@ -483,6 +520,7 @@ const products = [
       "rating": 4.8,
       "brand": "Yogurt Delight",
       "quantityInStock": 18,
+      "count": 1,
       "portion": "500g"
     },
     {
@@ -496,6 +534,7 @@ const products = [
       "rating": 4.5,
       "brand": "Pasta Perfect",
       "quantityInStock": 30,
+      "count": 1,
       "portion": "500g"
     },
     {
@@ -509,6 +548,7 @@ const products = [
       "rating": 4.8,
       "brand": "Berry Bliss",
       "quantityInStock": 22,
+      "count": 1,
       "portion": "300g"
     },
     {
@@ -522,6 +562,7 @@ const products = [
       "rating": 4.4,
       "brand": "Veggie Delight",
       "quantityInStock": 30,
+      "count": 1,
       "portion": "50g"
     },
     {
@@ -535,6 +576,7 @@ const products = [
       "rating": 4.7,
       "brand": "Vinegar House",
       "quantityInStock": 20,
+      "count": 1,
       "portion": "500ml"
     },
     {
@@ -548,6 +590,7 @@ const products = [
       "rating": 4.6,
       "brand": "Healthy Grains",
       "quantityInStock": 25,
+      "count": 1,
       "portion": "500g"
     },
     {
@@ -561,6 +604,7 @@ const products = [
       "rating": 4.8,
       "brand": "Choco Delight",
       "quantityInStock": 20,
+      "count": 1,
       "portion": "100g"
     },
     {
@@ -574,6 +618,7 @@ const products = [
       "rating": 4.6,
       "brand": "Spice World",
       "quantityInStock": 25,
+      "count": 1,
       "portion": "20g"
     },
     {
@@ -587,6 +632,7 @@ const products = [
       "rating": 4.4,
       "brand": "Sweet Life",
       "quantityInStock": 25,
+      "count": 1,
       "portion": "50g"
     },
     {
@@ -600,6 +646,7 @@ const products = [
       "rating": 4.7,
       "brand": "Green Oil",
       "quantityInStock": 25,
+      "count": 1,
       "portion": "50ml"
     },
     {
@@ -613,6 +660,7 @@ const products = [
       "rating": 4.6,
       "brand": "Grill Master",
       "quantityInStock": 25,
+      "count": 1,
       "portion": "50ml"
     },
     {
@@ -626,6 +674,7 @@ const products = [
       "rating": 4.5,
       "brand": "Fruit Splash",
       "quantityInStock": 25,
+      "count": 1,
       "portion": "100ml"
     }
   ]

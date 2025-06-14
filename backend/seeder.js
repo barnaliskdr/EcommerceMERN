@@ -65,7 +65,7 @@ connectDB();
 
 const importData = async () => {
     try {
-        await Order.deleteMany();
+        // await Order.deleteMany();
         await Product.deleteMany();
         await User.deleteMany();
 
@@ -87,24 +87,26 @@ const importData = async () => {
         process.exit(1);  // Exit with failure code
     }
 };
+importData();
 
-const destroyData = async () => {
-    try {
-        await Order.deleteMany();
-        await Product.deleteMany();
-        await User.deleteMany();
 
-        console.log("Data destroyed successfully!".green.inverse);
-        process.exit();  // Exit after successful destruction
-    } catch (error) {
-        console.error(`${error.message}`.red.inverse);
-        process.exit(1);  // Exit with failure code
-    }
-};
+// const destroyData = async () => {
+//     try {
+//         await Order.deleteMany();
+//         await Product.deleteMany();
+//         await User.deleteMany();
 
-// Determine if we are importing or destroying data based on command-line arguments
-if (process.argv[2] === '-d') {
-    destroyData();
-} else {
-    importData();
-}
+//         console.log("Data destroyed successfully!".green.inverse);
+//         process.exit();  // Exit after successful destruction
+//     } catch (error) {
+//         console.error(`${error.message}`.red.inverse);
+//         process.exit(1);  // Exit with failure code
+//     }
+// };
+
+// // Determine if we are importing or destroying data based on command-line arguments
+// if (process.argv[2] === '-d') {
+//     destroyData();
+// } else {
+//     importData();
+// }

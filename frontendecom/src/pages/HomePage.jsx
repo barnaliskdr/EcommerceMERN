@@ -15,12 +15,12 @@ import { Rating, ThinRoundedStar, ThinStar } from '@smastrom/react-rating';
 // import { useDispatch } from 'react-redux';
 
 const HomePage = () => {
-  const cart = useSelector((state) => state.cart.cartProducts);
-  const quantity = useSelector((state) => state.cart.cartTotalQuantity);
-  const price = useSelector((state) => state.cart.cartTotalPrice);
-  console.log("Current cart state:", cart);
-  console.log("Current quantity state:", quantity);
-  console.log("Current price state:", price);
+  // const cart = useSelector((state) => state.cart.cartProducts);
+  // const quantity = useSelector((state) => state.cart.cartTotalQuantity);
+  //const price = useSelector((state) => state.cart.cartTotalPrice);
+  // console.log("Current cart state:", cart);
+  // console.log("Current quantity state:", quantity);
+  // console.log("Current price state:", price);
   // const {data: products, isloading, isError} = useGetProductsQuery(); //reduxtoolkit
   const myStyles = {
     itemShapes: ThinStar,
@@ -38,7 +38,7 @@ const HomePage = () => {
   const [bakery, setBakery] = useState([]);
   const [spices, setSpices] = useState([]);
   const [frozen,setFrozen] = useState([]);
-  const[grain,setGrain] = useState([]);
+  const [grain,setGrain] = useState([]);
   const [visible, setVisible] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [rating, setRating] = useState(0);
@@ -103,7 +103,6 @@ const HomePage = () => {
             <Cards productType="Dairy Alternatives"/>
           </Accordion.Body>
         </Accordion.Item>
-        {/* Add more Accordion items for other categories */}
       </Accordion>
       {/* {selectedProduct && <Singleproduct product={selectedProduct} setVisible={setVisible} visible={visible} />} */}
     

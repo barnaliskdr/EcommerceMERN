@@ -31,11 +31,11 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import {thunk} from 'redux-thunk';
 import { cartReducer } from './reducers/CartReducer';
-
+import { loginReducer } from './reducers/LoginReducer';
 
 const rootReducer = combineReducers({
   cart: cartReducer,
-  // other reducers
+  login: loginReducer
 });
 
 const store = createStore(
@@ -43,6 +43,6 @@ const store = createStore(
   applyMiddleware(thunk)
 );
 
-
 export default store;
+
 

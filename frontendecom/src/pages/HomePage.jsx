@@ -43,41 +43,12 @@ const HomePage = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [rating, setRating] = useState(0);
   
-    // dispatch(getProductDetails);
-    // useEffect(() => {
-    //   const fetchProducts = async () => {
-    //     try {
-    //       const productDetails = await getProductDetails();
-          
-    //       console.log('API Response:', productDetails); // Log the API response
-    //       console.log(typeof(productDetails));
-    //       // console.log(typeof("productArray--",[productsArray]));
-    //       // Ensure productDetails is an array
-    //       // const productsArray = Array.isArray(productDetails) ? productDetails : [productDetails];
-    //       // console.log('Products Array:', productsArray); // Log the converted array
-  
-    //       setProducts(productDetails); // Set the state with the fetched product details
-    //     } catch (error) {
-    //       console.error('Error fetching product details:', error);
-    //     }
-    //   };
-  
-    //   fetchProducts();
-    // }, []);
-
-    // useEffect(() => {
-    //   setProducts(Mockdata); 
-    // },[])
+  const userData = useSelector((state) => state.login);
+  console.log("User Data:", userData);
       
   return (
     <div>
-      {/* {isLoading ? (
-        <div>Loading...</div>
-      ) : (
-        <div>
-          <h1>Home Page</h1>
-        </div>
-      )} */}
+      {/* {userData ? <h1>Welcome {userData}</h1>: <h1>Please Login</h1>} */}
       <Accordion className="homeAccordian" defaultActiveKey={['0', '1', '2', '3']}>
         <Accordion.Item eventKey="0">
           <Accordion.Header>Fruits</Accordion.Header>
@@ -104,47 +75,6 @@ const HomePage = () => {
           </Accordion.Body>
         </Accordion.Item>
       </Accordion>
-      {/* {selectedProduct && <Singleproduct product={selectedProduct} setVisible={setVisible} visible={visible} />} */}
-    
-   {/* <Container className="d-grid gap-4 d-flex justify-content-center flex-wrap m-3">
-       {console.log(products)}
-         {products.map((product)=>{ */}
-
-    {/* //       return(
-    //       <div>
-    //       <Card style={{ width: '18rem' }} className="p-2">
-    //         <Card.Img variant="top" src={product.image}></Card.Img>
-    //              <Card.Body>
-    //           <Card.Title>{product.name}</Card.Title>
-    //           <Card.Text>
-    //             Product Type: {product.category}
-    //           </Card.Text>
-    //           <Card.Text>
-    //             Stock Available: {product.quantity}
-    //           </Card.Text>
-    //           <Card.Text>
-    //             Price: {product.price}
-    //           </Card.Text>
-    //           <Card.Text>
-    //             Company: {product.brand}
-    //           </Card.Text>
-    //           {/* <Card.Text>
-    //             Rating:
-    //             <span className="RatingStyle">
-    //             <Rating readOnly style={{ maxWidth: 20}} value={rating} onChange={setRating} itemStyles={myStyles} /></span>
-    //           </Card.Text> 
-            </Card.Body>
-    //         <Button className="bg-light border border-info text-dark m-2" onClick= {()=>viewDetailsHandle(product)}>View Details</Button>
-    //         <div className="d-flex justify-content-center align-items-center w-5 h-4 bg-info text-white m-3">
-    //           <Button variant="outline-primary text-white">-</Button>
-    //           <span className="px-2">Add To Cart</span>
-    //           <Button variant="outline-primary text-white">+</Button>
-    //         </div>
-    //       </Card>
-    //       </div>) </Card.Body>
-    //        })}
-    //   {selectedProduct && <Singleproduct product={selectedProduct} setVisible={setVisible}visible={visible}/>}
-    //   </Container> */}
      </div>
   )
 }

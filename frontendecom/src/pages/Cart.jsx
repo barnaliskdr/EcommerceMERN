@@ -4,18 +4,13 @@ import { useGetProductsQuery } from '../slices/productsApiSlice';
 import { useSelector } from 'react-redux';
 import "../components/Cards.scss";
 import emptycartsad from '../assets/emptycart.png';
+import { Button } from 'react-bootstrap';
 // import products from '../../../backend/data/products';
 
 const Cart = () => {
 
     let sum = 0;
-    const myname = "Barnali-cag";
-    // const newName = myname.
-    console.log(myname.length);
-    console.log(myname.charAt(8));
-    console.log(myname.slice(0,7));
-    console.log(myname.substring(-3,3));
-    console.log("slice[-1,1]: ",myname.slice(-3,3));
+    
     // const cartProducts = useSelector((state)=> state.cart.itemData);
     //console.log("cartProds",cartProducts);
     // const { cartProducts, cartTotalQuantity, cartTotalPrice } = useSelector((state) => state.cart);
@@ -38,9 +33,14 @@ const Cart = () => {
 //     <pre>{JSON.stringify(cart, null, 2)}</pre>
 //   </div>
 // )
-const orderTotal = cart.reduce((acc, product) => acc + Math.ceil(product.price * product.count), 0);
+  const orderTotal = cart.reduce((acc, product) => acc + Math.ceil(product.price * product.count), 0);
+  const placeOrder = () => {
+    console.log("Order placed successfully!");
+    // Here you can add the logic to place the order, e.g., sending a request to the server
+  }
+
   return (
-    <div className="p-5 d-flex justify-content-center align-items-center" style={{ minHeight: "80vh" }}>
+    <div className="p-5 justify-content-center align-items-center" style={{ minHeight: "80vh" }}>
       {cart.length === 0 ? (
         <div className="d-flex flex-column align-items-center w-100">
           <img
@@ -79,11 +79,20 @@ const orderTotal = cart.reduce((acc, product) => acc + Math.ceil(product.price *
                 <td>{product.portion} * {product.count}</td>
               </tr>
             ))}
-            <tr>
+            {/* <tr>
               <td colSpan={6} className="text-end fw-bold">Order Total: {orderTotal}</td>
-            </tr>
+            </tr> */}
           </tbody>
         </Table>
+      )}
+      
+        {cart.length > 0 && (
+        <div className="d-flex justify-content-between">
+         <Button onClick={placeOrder}>Place Order</Button>
+          <div className="text-end fw-bold">
+            <h3>Order Total: ${orderTotal}</h3>
+          </div>
+        </div>
       )}
     </div>
   )

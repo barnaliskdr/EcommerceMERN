@@ -4,6 +4,7 @@ import './App.css';
 import HomePage from './pages/HomePage';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import { ToastContainer, toast } from 'react-toastify';
 import { Navigate,useRoutes } from 'react-router-dom';
 // import { BrowserRouter , Route, Routes } from 'react-router-dom';
 import NotFound from './pages/NotFound';
@@ -16,6 +17,13 @@ import { Outlet } from 'react-router-dom';
 function App() {
   return (
     <div className="d-flex flex-column vh-100">
+      <ToastContainer 
+      position="top-right" 
+      autoClose={5000} 
+      hideProgressBar={true} 
+      newestOnTop={false} 
+      theme="dark"
+      closeOnClick rtl={false}/>
       <header className="flex-shrink-0">
         <Header />
       </header>

@@ -66,6 +66,12 @@ const orderSchema = new mongoose.Schema({
         update_time: { type: String },
         email_address: { type: String },
     },
+    inTransit:
+    {
+        type: Boolean,
+        required: true,
+        default: false
+    },
     tax: {
         type: Number,
         required: true,

@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Loginpage from '../assets/loginpage.png';
+import { login } from '../actions/loginActions';
 import "./Login.scss";
 
 const Login = () => {
@@ -33,22 +34,27 @@ const Login = () => {
     setPassword(e.target.value);
   }
 
-  const handleLogin = async(e) => {
-    try
-    {
-      console.log("inside try block of signup");
-      const resp = await axios.post("http://localhost:5000/api/auth/login", {
-        name: name,
-        email: email,
-        password: password
-      })
-      console.log("resp-->",resp);
-      navigate("/");
-    }
-    catch(err)
-    {
-      console.log("error-->",err);
-    }
+  // const handleLogin = async(e) => {
+  //   try
+  //   {
+  //     console.log("inside try block of signup");
+  //     const resp = await axios.post("http://localhost:5000/api/auth/login", {
+  //       name: name,
+  //       email: email,
+  //       password: password
+  //     })
+  //     console.log("resp-->",resp);
+  //     navigate("/");
+  //   }
+  //   catch(err)
+  //   {
+  //     console.log("error-->",err);
+  //   }
+  // }
+
+  const handleLogin = async (e) => {
+    dispatch(login(name, email, password, navigate));
+   // dispatch(addToCart(product));
   }
 
   return (
@@ -80,7 +86,7 @@ const Login = () => {
         className = "m-4 mr-5"
         onChange = {(e) => handlePassword(e)}
       />
-      <Button className="d-flex m-4 end-0 justify-content-end" variant="primary" onClick={(e) => handleLogin(e)}>Login</Button>
+      <Button className="d-flex m-4 end-0 justify-content-end" variant="primary" onClick={handleLogin}>Login</Button>
       <div className="text-center mt-3">
         <Link to="/signup" style={{ textDecoration: 'underline', color: '#007bff' }}>
           Don't have an account? Sign up here

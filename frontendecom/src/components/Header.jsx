@@ -6,9 +6,12 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import {FaShoppingCart,FaUser} from 'react-icons/fa';
+import { GoSignOut } from "react-icons/go";
 import { FaHome } from "react-icons/fa";
+import { CgProfile } from "react-icons/cg";
 import logo from '../assets/logo.png';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { Form, FormControl, Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { useGetProductByNameQuery , useLazyGetProductByNameQuery } from '../slices/productsApiSlice';
@@ -28,6 +31,13 @@ const Header = () => {
     console.log(productName);
   }
 
+  const handleLogout = () => {
+    // localStorage.removeItem("userData");
+    // localStorage.removeItem("token");
+    //dispatch(logout());
+    navigate("/");
+  }
+
   // useEffect(() => {
    
   //   {productName? console.log(products): ""}
@@ -43,6 +53,7 @@ const Header = () => {
     
   }
 
+  const userData = useSelector((state) => state.login.userData);
 
   // console.log("products---",product);
   
@@ -60,17 +71,26 @@ const Header = () => {
 
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-        
           <Nav className="ms-auto">
-          <Nav.Link href="/">
+          <Nav.Link as={Link} to="/">
               <FaHome/>Home
             </Nav.Link>
             <Nav.Link as={Link} to="/cart">
                 <FaShoppingCart/>cart
             </Nav.Link>
-            <Nav.Link href="/login">
-                <FaUser/>Sign In
+            { userData!=null ? 
+            <>
+            <Nav.Link as={Link} to="/logout" onClick={handleLogout}>
+                <GoSignOut/>Sign Out
             </Nav.Link>
+            <Nav.Link as={Link} to="/profile">
+                <CgProfile/>{userData.name}
+            </Nav.Link>
+            </>
+            :
+            <Nav.Link as={Link} to="/login">
+                <FaUser/>Sign In
+            </Nav.Link>}
           </Nav>
         </Navbar.Collapse>
       </Container>

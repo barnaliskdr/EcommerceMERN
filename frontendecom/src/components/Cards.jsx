@@ -108,29 +108,42 @@ import { useDispatch, useSelector } from 'react-redux';
 // import { useGetProductsQuery } from '../slices/productsApiSlice';
 // import { useGetAddToCartQuery } from '../slices/cartSlices';
 import Rating from './Rating';
+import { toast } from 'react-toastify';
 // import { addToCart, removeFromCart } from '../slices/cartSlices';
 import { addToCart,removeFromCart } from '../actions/cartActions';
+import CustomToast from './CustomToast';
 
 const Cards = ({ productType }) => {
   const [visible, setVisible] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [products, setProducts] = useState([]);
+  const [showToast, setShowToast] = useState(false);
   const productsAdded  = useSelector((state)=> state);
   //const [productData, setProductData] = useState([]); 
   //const {data: products, isloading, isError} = useGetProductsQuery(); //reduxtoolkit
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 4;
   const dispatch = useDispatch();
+  const userData = useSelector((state) => state.login.userData);
+
 
   const viewDetailsHandle = (product) => {
     setSelectedProduct(product);
     setVisible(true);
   };
 
+
   const handleAddToCart = (product) => {
     //console.log("called Add to cart",product);
-
-    dispatch(addToCart(product));
+    if(userData !== null)
+    {
+      dispatch(addToCart(product));
+    }
+    else
+    {
+      setShowToast(true);
+      toast.info("Please login to add items to cart");
+    }
   };
 
   const handleRemoveFromCart = (product) => {
@@ -153,10 +166,6 @@ const Cards = ({ productType }) => {
   }
 
   useEffect(() => {
-    //dispatch(getAllProducts());
-    // if (products) {
-    //   console.log('Fetched products:', products);
-    // }
     getAllProducts();
   }, []); 
 

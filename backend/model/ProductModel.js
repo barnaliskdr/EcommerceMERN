@@ -26,12 +26,12 @@ const reviewSchema = new mongoose.Schema({
 
 
 const productSchema = new mongoose.Schema({
-    user:
-    {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        ref: 'User'  //defines from which collection this property is coming from as its a foreign key
-    },
+    // user:
+    // {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     required: true,
+    //     ref: 'User'  //defines from which collection this property is coming from as its a foreign key
+    // },
     name: {
         type: String,
         required: true

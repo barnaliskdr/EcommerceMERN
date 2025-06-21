@@ -5,10 +5,11 @@ const verifyToken = (req, res, next) =>
 {
     let token;
     let authHeader = req.headers.authorization;
+    console.log("Authorization header:", authHeader);
     if(authHeader && authHeader.startsWith("Bearer"))
     {
         token = authHeader.split(" ")[1]; //0th index has Bearer and 1st index has the token.
-
+        console.log("Token found:", token);
         if(!token)
         {
             return res
@@ -17,7 +18,7 @@ const verifyToken = (req, res, next) =>
         }
 
         try{
-            const decode = jwt.verify(token, process.env.JWT_SECRET_KEY);
+            const decode = jwt.verify(token, "jwt-secret-key");
             req.user = decode;
             console.log("The decoded user is:", req.user);
             next();

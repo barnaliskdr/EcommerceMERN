@@ -105,6 +105,7 @@ export const register = async (req, res) => {
 
 export const login = async (req, res) => {
     console.log(req.body);
+    console.log("Normal Login Flow")
     const { email, password } = req.body;
     try {
         let user = await User.findOne({ email });

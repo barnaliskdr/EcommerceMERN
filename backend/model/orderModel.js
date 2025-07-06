@@ -7,25 +7,26 @@ const orderSchema = new mongoose.Schema({
         required: true,
         ref: 'User'  //defines from which collection this property is coming from as its a foreign key
     },
+    orderStatus:{
+        type: String,
+        required: true,
+        default: 'Pending'  //default status of the order
+    },
     orderItems: [
         {
             name: {
                 type: String,
                 required: true
             },
-            qty: {
+            count: {
                 type: Number,
-                required: true
-            },
-            image: {
-                type: String,
                 required: true
             },
             price: {
                 type: Number,
                 required: true
             },
-            product: {
+            _id: {
                 type: mongoose.Schema.Types.ObjectId,
                 required: true,
                 ref: 'Product'  //defines from which collection this property is coming from as its a foreign key
@@ -50,6 +51,10 @@ const orderSchema = new mongoose.Schema({
             type: String,
             required: true
         },
+        phone: {
+            type: String,
+            required: true
+        }
     },
     itemPrice: {
         type: Number,

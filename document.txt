@@ -1,0 +1,31 @@
+get tasks on a specific block --> http://localhost:8080/engine-rest/external-task?topicName=place-order
+
+made a api call for  getting all the tasks under a particular block named place-order
+
+then do fetch and lock call for a bulk of particular tasks (5 or 10) .
+
+
+
+
+
+
+
+
+ I want the place order API to complete the task as well by doing this fetchandLock and complete api call.
+ I am sharing the place order API
+
+
+
+{
+  "workerId": "place-order-worker",
+  "maxTasks": 5,
+  "topics": [
+    {
+      "topicName": "place-order",
+      "lockDuration": 10000
+    }
+  ]
+}
+
+
+

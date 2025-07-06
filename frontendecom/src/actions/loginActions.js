@@ -8,6 +8,7 @@ export const login = (name, email, password, navigate) => {
         });
         try{
             const responseData = await loginfromserver(name, email, password, navigate);
+            console.log("Login successful response data:", responseData);
                 // {
                 //     "message": "Login successful",
                 //     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBvb2phQGdtYWlsLmNvbSIsInVzZXJuYW1lIjoiUG9vamEgR29tZXMiLCJyb2xlIjoiY3VzdG9tZXIiLCJpYXQiOjE3NDk5ODUyMTQsImV4cCI6MTc1MDA3MTYxNH0.F35iQo9Bb3DcDn_oNU1VehHZZcBpqhyBZlKbm3PkLmg",
@@ -19,6 +20,7 @@ export const login = (name, email, password, navigate) => {
             dispatch({
             type: "LOGIN_SUCCESS",
             payload: {
+                id: responseData.user.id,
                 name: responseData.user.name,
                 email: responseData.user.email,
                 role: responseData.user.role,

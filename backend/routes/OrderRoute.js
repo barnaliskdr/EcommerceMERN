@@ -3,7 +3,7 @@ import express from "express";
 //import products from '../data/products.js';
 import Product from "../model/productModel.js";
 import { placeOrder, getAllOrdersByuserId, getAllOrdersByDate, 
-         getOrderById, updateOrderToPaid, updateOrderToDelivered,
+         getAllOrdersByOrderId, updateOrderToPaid, updateOrderToDelivered,
         deleteOrder, updateOrderToTransit
  } from "../controller/ordercontroller.js";
 
@@ -23,11 +23,11 @@ const router = express.Router();
 // })
 
 router.post("/placeorder",placeOrder);
-router.get("/api/orders/:userid",getAllOrdersByuserId);
-router.get("/api/orders/:date",getAllOrdersByDate);
-router.get("/api/orders/:userid",getOrderById);       
-router.put("/ ",updateOrderToPaid);
-router.put("/",updateOrderToDelivered);
+router.get("/user/:userid",getAllOrdersByuserId);
+router.get("/order/:orderid",getAllOrdersByOrderId);
+// router.get("/:userid",getOrderById);       
+// router.put("/ ",updateOrderToPaid);
+router.put("/admin/updateorder/:orderId",updateOrderToDelivered);
 router.put("/",updateOrderToTransit);
 router.delete("/",deleteOrder);
 

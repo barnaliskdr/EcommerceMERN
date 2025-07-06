@@ -14,6 +14,7 @@ export const loginReducer = (state = initialState, action) => {
                 loading: true
             };
         case "LOGIN_SUCCESS":
+            console.log("Login successful:", action.payload);
             return {
                 ...state,
                 isLoggedIn: true,

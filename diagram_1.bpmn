@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0fv30tv" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.36.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.23.0">
+  <bpmn:process id="Process_1biqo1h" isExecutable="true" camunda:historyTimeToLive="180">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_02uxsb2</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:serviceTask id="Activity_1upp6v6" name="Place Order" camunda:type="external" camunda:topic="place-order">
+      <bpmn:incoming>Flow_02uxsb2</bpmn:incoming>
+      <bpmn:outgoing>Flow_0pxpplj</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="Event_1h0fqu6">
+      <bpmn:incoming>Flow_1p0dp3z</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_02uxsb2" sourceRef="StartEvent_1" targetRef="Activity_1upp6v6" />
+    <bpmn:sequenceFlow id="Flow_0pxpplj" sourceRef="Activity_1upp6v6" targetRef="Activity_033dj2g" />
+    <bpmn:userTask id="Activity_033dj2g" name="prepared for shipment">
+      <bpmn:extensionElements>
+        <camunda:taskListener class="" event="create" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0pxpplj</bpmn:incoming>
+      <bpmn:outgoing>Flow_0nmvdil</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="Activity_054ewa1" name="Shipment prepared">
+      <bpmn:incoming>Flow_0nmvdil</bpmn:incoming>
+      <bpmn:outgoing>Flow_1p0dp3z</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_0nmvdil" name="Shipped" sourceRef="Activity_033dj2g" targetRef="Activity_054ewa1">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${signal == "SHIPPED"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_1p0dp3z" sourceRef="Activity_054ewa1" targetRef="Event_1h0fqu6" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1biqo1h">
+      <bpmndi:BPMNShape id="BPMNShape_01sndph" bpmnElement="StartEvent_1">
+        <dc:Bounds x="152" y="112" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1upp6v6_di" bpmnElement="Activity_1upp6v6">
+        <dc:Bounds x="330" y="90" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1h0fqu6_di" bpmnElement="Event_1h0fqu6">
+        <dc:Bounds x="1002" y="112" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_033dj2g_di" bpmnElement="Activity_033dj2g">
+        <dc:Bounds x="550" y="90" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_054ewa1_di" bpmnElement="Activity_054ewa1">
+        <dc:Bounds x="780" y="90" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_02uxsb2_di" bpmnElement="Flow_02uxsb2">
+        <di:waypoint x="188" y="130" />
+        <di:waypoint x="330" y="130" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0pxpplj_di" bpmnElement="Flow_0pxpplj">
+        <di:waypoint x="430" y="130" />
+        <di:waypoint x="550" y="130" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0nmvdil_di" bpmnElement="Flow_0nmvdil">
+        <di:waypoint x="650" y="130" />
+        <di:waypoint x="780" y="130" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="695" y="112" width="41" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1p0dp3z_di" bpmnElement="Flow_1p0dp3z">
+        <di:waypoint x="880" y="130" />
+        <di:waypoint x="1002" y="130" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

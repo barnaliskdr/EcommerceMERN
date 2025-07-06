@@ -80,7 +80,7 @@ const Header = () => {
             </Nav.Link>
             { userData!=null ? 
             <>
-            <Nav.Link as={Link} to="/logout" onClick={handleLogout}>
+            <Nav.Link as={Link} to="/login" onClick={handleLogout}>
                 <GoSignOut/>Sign Out
             </Nav.Link>
             <Nav.Link as={Link} to="/profile">

@@ -7,6 +7,7 @@ import productRoutes from "./routes/ProductRoutes.js";
 import UserRoutes from "./routes/UserRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 import orderRoutes from "./routes/OrderRoute.js";
+import workflowRoutes from "./routes/WorkflowRoutes.js";
 
 const port = 5000;
 connectDB();
@@ -25,6 +26,7 @@ app.use('/api/auth',UserRoutes);
 app.use('/api/auth',authRoutes);
 app.use('/api/products',productRoutes);
 app.use('/api/orders',orderRoutes);
+app.use('/api/camunda',workflowRoutes);
 app.get("/", (req, res) => {
     res.send("Hello World!");
     // res.json(products);

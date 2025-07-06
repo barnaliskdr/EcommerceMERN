@@ -1,42 +1,70 @@
-import React,{useEffect} from 'react';
+import React, { useEffect, useState } from 'react';
 import Table from 'react-bootstrap/Table';
+import { useNavigate } from 'react-router-dom';
+import { placeOrderAction } from '../actions/orderActions';
 import { useGetProductsQuery } from '../slices/productsApiSlice';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import "../components/Cards.scss";
 import emptycartsad from '../assets/emptycart.png';
-import { Button } from 'react-bootstrap';
+import { Button, Card } from 'react-bootstrap';
+import { use } from 'react';
 // import products from '../../../backend/data/products';
 
 const Cart = () => {
 
-    let sum = 0;
-    
-    // const cartProducts = useSelector((state)=> state.cart.itemData);
-    //console.log("cartProds",cartProducts);
-    // const { cartProducts, cartTotalQuantity, cartTotalPrice } = useSelector((state) => state.cart);
-    // console.log(cartTotalQuantity);
-    // console.log(cartProducts);
+  const [address, setAddress] = useState('');
+  const [city, setCity] = useState('');
+  const [zipcode, setZipcode] = useState('');
+  const [country, setCountry] = useState('');
+  const [contact, setContact] = useState('');
+  const [deliveryAddress, setDeliveryAddress] = useState({});
+  const [showToast,setShowToast] = useState(false);
 
-    // const state = useSelector((state) => state);
-    // const cartItems = useSelector((state) => state.cart.itemData);
-    // console.log('Redux state:', state);
-    // console.log("cart Items:", cartItems);
 
-    const cart = useSelector(state => state.cart.itemData);
-    console.log("cart:", cart);
-  //   useEffect(() => {
-  //   console.log("cartProducts:", cart);
-  // }, []);
+  const dispatch = useDispatch();
+  const navigate = useNavigate(); 
+  const cart = useSelector(state => state.cart.itemData);
+  const userDetails = useSelector(state => state.login.userData);
+  console.log("userDetails from cart:", userDetails);
+  console.log("cart:", cart);
 
-//   return (
-//   <div>
-//     <pre>{JSON.stringify(cart, null, 2)}</pre>
-//   </div>
-// )
   const orderTotal = cart.reduce((acc, product) => acc + Math.ceil(product.price * product.count), 0);
+  const tax =  Math.ceil(orderTotal * 0.02); // Assuming a tax rate of 5%
+  const shippingCharge =  Math.ceil(orderTotal * 0.02); // Assuming a shipping charge of 5%
+  
   const placeOrder = () => {
+    console.log("Hey:", deliveryAddress);
+    if (
+      !deliveryAddress ||
+      Object.keys(deliveryAddress).length === 0 ||
+      !deliveryAddress.address ||
+      !deliveryAddress.city ||
+      !deliveryAddress.zipCode ||
+      !deliveryAddress.country ||
+      !deliveryAddress.phone
+    ) {
+      window.alert("Please fill the delivery address details before placing the order.");
+      return;
+    }
     console.log("Order placed successfully!");
-    // Here you can add the logic to place the order, e.g., sending a request to the server
+    // dispatch({ type: 'placeOrder', payload: { orderItems: cart, orderTotal } });
+    dispatch(placeOrderAction(cart, orderTotal, userDetails.id, deliveryAddress, "Cash on Delivery", tax, shippingCharge,navigate,setShowToast));
+  }
+  // State for address form fields
+  
+  const handleAddressSubmit = (e) => {
+    e.preventDefault();
+    console.log('Address:', address);
+    console.log('City:', city);
+    console.log('Zipcode:', zipcode);
+    console.log('Contact:', contact);
+    setDeliveryAddress({
+      address: address,
+      city: city,
+      zipCode: zipcode,
+      country: country,
+      phone: contact
+    })
   }
 
   return (
@@ -55,6 +83,7 @@ const Cart = () => {
           </p>
         </div>
       ) : (
+        <>
         <Table striped hover>
           <thead>
             <tr>
@@ -79,16 +108,78 @@ const Cart = () => {
                 <td>{product.portion} * {product.count}</td>
               </tr>
             ))}
-            {/* <tr>
-              <td colSpan={6} className="text-end fw-bold">Order Total: {orderTotal}</td>
-            </tr> */}
           </tbody>
         </Table>
-      )}
+      <Card className="mx-auto my-4" style={{ width: '30rem' }}>
+        <Card.Body>
+          <Card.Title className="text-center">Delivery Address Details</Card.Title>
+          <form className="cart-form mx-auto">
+          <div className="form-group m-2">
+            <label htmlFor="address">Delivery Address:</label>
+            <input
+              type="address"
+              className="form-control"
+              id="address"
+              aria-describedby="address of delivery"
+              placeholder="Enter delivery Address"
+              value={address}
+              onChange={e => setAddress(e.target.value)}
+            />
+          </div>
+          <div className="form-group m-2">
+            <label htmlFor="city">City:</label>
+            <input
+              type="text"
+              className="form-control"
+              id="city"
+              placeholder="City"
+              value={city}
+              onChange={e => setCity(e.target.value)}
+            />
+          </div>
+          <div className="form-group m-2">
+            <label htmlFor="country">Country:</label>
+            <input
+              type="text"
+              className="form-control"
+              id="country"
+              placeholder="Country"
+              value={country}
+              onChange={e => setCountry(e.target.value)}
+            />
+          </div>
+          <div className="form-group m-2">
+            <label htmlFor="zipcode">Zipcode:</label>
+            <input
+              type="number"
+              className="form-control"
+              id="zipcode"
+              placeholder="zipcode"
+              value={zipcode}
+              onChange={e => setZipcode(e.target.value)}
+            />
+          </div>
+          <div className="form-group m-2">
+            <label htmlFor="contact">Contact No:</label>
+            <input
+              type="number"
+              className="form-control"
+              id="contact"
+              placeholder="contact number"
+              value={contact}
+              onChange={e => setContact(e.target.value)}
+            />
+          </div>
+        <button type="submit" className="d-flex justify-content-end btn btn-primary m-2" onClick={handleAddressSubmit}>Submit</button>
+      </form>
+        </Card.Body>
+      </Card>
       
-        {cart.length > 0 && (
+      </>
+      )}
+      {cart.length > 0 && (
         <div className="d-flex justify-content-between">
-         <Button onClick={placeOrder}>Place Order</Button>
+          <Button onClick={placeOrder}>Place Order</Button>
           <div className="text-end fw-bold">
             <h3>Order Total: ${orderTotal}</h3>
           </div>

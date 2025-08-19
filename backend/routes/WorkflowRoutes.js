@@ -1,20 +1,19 @@
 import  express from 'express';
-import { getAllTasks, completeTask } from '../controller/workflowController.js';
+import { getAllTasks } from '../controller/workflowController.js';
+import { completeUserTask } from '../workFlowworkers/workflowApis.js';
+import { updateStatusToDB } from '../controller/ordercontroller.js';
 
 
 const router = express.Router();
 
-// router.add('/start', async (req, res) => {
-//   try {
-//     const { processInstanceId } = await req.workflow.startProcess('ecommerce-process');
-//     res.status(200).json({ processInstanceId });
-//   } catch (error) {
-//     console.error('Error starting workflow:', error);
-//     res.status(500).json({ error: 'Failed to start workflow' });
-//   }
-// });
 
 router.get('/tasks',getAllTasks);
-router.post('/tasks/:taskId/complete', completeTask);
+router.post('/tasks/:processInstanceId/completeTask', completeUserTask);
+router.post('/tasks/:taskTopic/:processInstanceId', updateStatusToDB);
+// Make sure to pass processInstanceId from the request body to completeUserTask
+// router.post('/tasks/:processInstanceId/complete', (req, res) => {
+//     // const { processInstanceId } = req.body;
+//     completeUserTask(processInstanceId);
+// });
 
 export default router;

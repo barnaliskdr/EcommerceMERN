@@ -26,6 +26,11 @@ const orderSchema = new mongoose.Schema({
                 type: Number,
                 required: true
             },
+            portion:
+            {
+                type: String,
+                required: true
+            },
             _id: {
                 type: mongoose.Schema.Types.ObjectId,
                 required: true,
@@ -55,6 +60,10 @@ const orderSchema = new mongoose.Schema({
             type: String,
             required: true
         }
+    },
+    processInstanceId: {
+        type: String,
+        required: true
     },
     itemPrice: {
         type: Number,

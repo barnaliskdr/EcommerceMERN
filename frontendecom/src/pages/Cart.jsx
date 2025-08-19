@@ -8,6 +8,7 @@ import "../components/Cards.scss";
 import emptycartsad from '../assets/emptycart.png';
 import { Button, Card } from 'react-bootstrap';
 import { use } from 'react';
+import ItemsTable from '../components/ItemsTable';
 // import products from '../../../backend/data/products';
 
 const Cart = () => {
@@ -24,6 +25,9 @@ const Cart = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate(); 
   const cart = useSelector(state => state.cart.itemData);
+  const allcart = useSelector(state => state.cart);
+  console.log("cart from cart:", cart);
+  console.log("allcart from cart:", allcart);
   const userDetails = useSelector(state => state.login.userData);
   console.log("userDetails from cart:", userDetails);
   console.log("cart:", cart);
@@ -84,7 +88,7 @@ const Cart = () => {
         </div>
       ) : (
         <>
-        <Table striped hover>
+        {/* <Table striped hover>
           <thead>
             <tr>
               <th>Id</th>
@@ -109,7 +113,8 @@ const Cart = () => {
               </tr>
             ))}
           </tbody>
-        </Table>
+        </Table> */}
+        <ItemsTable items={cart} />
       <Card className="mx-auto my-4" style={{ width: '30rem' }}>
         <Card.Body>
           <Card.Title className="text-center">Delivery Address Details</Card.Title>

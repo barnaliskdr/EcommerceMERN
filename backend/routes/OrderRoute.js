@@ -2,8 +2,8 @@ import express from "express";
 // import ProductController from "../controllers/ProductController.js";
 //import products from '../data/products.js';
 import Product from "../model/productModel.js";
-import { placeOrder, getAllOrdersByuserId, getAllOrdersByDate, 
-         getAllOrdersByOrderId, updateOrderToPaid, updateOrderToDelivered,
+import { placeOrder, getAllOrders, getOrdersByuserId, getOrdersByDate, 
+         getOrderByOrderId, updateOrderStatus, updateOrderToDelivered,
         deleteOrder, updateOrderToTransit
  } from "../controller/ordercontroller.js";
 
@@ -22,14 +22,17 @@ const router = express.Router();
 //       }
 // })
 
+
 router.post("/placeorder",placeOrder);
-router.get("/user/:userid",getAllOrdersByuserId);
-router.get("/order/:orderid",getAllOrdersByOrderId);
+router.get("/user/:userid",getOrdersByuserId);
+router.get("/order/:orderid",getOrderByOrderId);
+router.get("/allorders",getAllOrders);
+router.put("/updateorderStatus/:orderId",updateOrderStatus);
 // router.get("/:userid",getOrderById);       
 // router.put("/ ",updateOrderToPaid);
 router.put("/admin/updateorder/:orderId",updateOrderToDelivered);
 router.put("/",updateOrderToTransit);
-router.delete("/",deleteOrder);
+router.delete("/deleteorder",deleteOrder);
 
 export default router;
 

@@ -118,11 +118,9 @@ export const login = async (req, res) => {
             {
                 const token = jsonwebtoken.sign({email:user.email,password:user.password},
                     "jwt-secret-key",{expiresIn: "1d"});
-
                 //resp.cookie('token',token);
                 //localStorage.setItem('token',token);
-                return res.status(200).json({ status: "OK", token: token });
-
+                return res.status(200).json({ status: "OK", token: token, role: user.role, userId: user._id, name: user.name, email: user.email });
             }
             else
             {

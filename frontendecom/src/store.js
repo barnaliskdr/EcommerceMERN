@@ -32,10 +32,14 @@ import { createStore, applyMiddleware, combineReducers } from 'redux';
 import {thunk} from 'redux-thunk';
 import { cartReducer } from './reducers/CartReducer';
 import { loginReducer } from './reducers/LoginReducer';
+import { orderReducer } from './reducers/OrderReducer';
+import workflowReducer from './reducers/workflowReducer';
 
 const rootReducer = combineReducers({
   cart: cartReducer,
-  login: loginReducer
+  login: loginReducer,
+  order: orderReducer,
+  workflow: workflowReducer
 });
 
 const store = createStore(

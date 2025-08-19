@@ -1,5 +1,6 @@
 export const placeOrder = async(orderItems, orderTotal,userId, deliveryAddress, paymentMethod, tax, shippingcharge) => {
-   try{
+   console.log("Placing order with items:", orderItems);
+    try{
         const response = await fetch("http://localhost:5000/api/orders/placeorder",{
             method: "POST",
             headers: {
@@ -7,37 +8,10 @@ export const placeOrder = async(orderItems, orderTotal,userId, deliveryAddress, 
             },
             body: JSON.stringify({
             user: userId, // This should be dynamically set based on the logged-in user
-            // orderItems: [
-            //     {
-            //     "product": "6857a2ef69474cac8cf739a4",
-            //     "name": "Organic Apples",
-            //     "qty": 3,
-            //     "price": 12
-            //     },
-            //     {
-            //     "product": "6857a2ef69474cac8cf739a9",
-            //     "name": "Spinach",
-            //     "qty": 2,
-            //     "price": 12.5
-            //     },
-            //     {
-            //     "product": "6857a2ef69474cac8cf739ab",
-            //     "name": "Organic Eggs",
-            //     "qty": 2,
-            //     "price": 9
-            //     }
-            // ],
             orderItems: orderItems,
             orderTotal: orderTotal,
-            "isPaid": true,
-            "paidAt": "Tuesday, June 15, 2025",
-            // "DeliveryAddress": {
-            //     "address": "123 MG Road",
-            //     "city": "Mumbai",
-            //     "zipCode": "400001",
-            //     "country": "India",
-            //     "phone": "9876543210"
-            // },
+            isPaid: true,
+            paidAt: "Tuesday, June 15, 2025",
             DeliveryAddress: deliveryAddress,
             paymentMethod: paymentMethod,
             tax: tax,
@@ -53,7 +27,6 @@ export const placeOrder = async(orderItems, orderTotal,userId, deliveryAddress, 
         }
         )
         });
-
         console.log("response-->", response);
         return await response.json();
    }
@@ -61,4 +34,31 @@ export const placeOrder = async(orderItems, orderTotal,userId, deliveryAddress, 
        console.error("Order placement failed:", error);
        throw new Error("Order placement failed");
    }
+}
+
+
+
+// export const completeHumanTask = async (processInstanceId) => {
+//     try{
+//         const response = await fetch("http://localhost:8080/engine-rest/task/7049c518-583c-11f0-b454-28c5c83ea0c7/complete")
+//     }
+//     catch(error)
+//     {
+//         console.error("Error completing human task:", error);
+//         throw new Error("Failed to complete human task");
+//     }
+// }
+
+
+export const getAllOrders = async() => {
+    try{
+        const response = await fetch("http://localhost:5000/api/orders/allorders");
+        console.log("response-->", response);
+        return response.json();
+    }
+    catch(error)
+    {
+        console.error("Error fetching all orders:", error);
+        throw new Error("Failed to fetch all orders: " + error);
+    }
 }

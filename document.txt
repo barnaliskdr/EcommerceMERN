@@ -8,9 +8,6 @@ then do fetch and lock call for a bulk of particular tasks (5 or 10) .
 
 
 
-
-
-
  I want the place order API to complete the task as well by doing this fetchandLock and complete api call.
  I am sharing the place order API
 
@@ -29,3 +26,128 @@ then do fetch and lock call for a bulk of particular tasks (5 or 10) .
 
 
 
+{
+  "workerId": "status-worker",
+  "maxTasks": 5,
+  "usePriority": true,
+  "topics": [
+    {
+      "topicName": "update-order-status",
+      "lockDuration": 10000
+    }
+  ]
+}
+
+------------------------------------------------------------------------------------------------------------------
+
+1. Create EC2 instance in AWS and deploy project
+2. 15-20 tables
+3. Normalization. ER diagram
+4. what is authentication and authorization
+5. public API, Private API,
+6. How to do db configuration
+7. session management
+8. cookie management
+9. local storage
+10. Array 
+11. Tree
+12. Node
+13. Graph
+
+
+-----------------------------------------------------------------------------------------------------------------------------------
+
+{
+  "workerId": "status-worker"
+}
+
+{
+  "workerId": "status-worker",
+  "maxTasks": 5,
+  "usePriority": true,
+  "topics": [
+    {
+      "topicName": "update-order-status",
+      "lockDuration": 10000
+    }
+  ]
+}
+
+
+
+{
+  "workerId": "place-order-worker"
+}
+
+
+{
+  "workerId": "place-order-worker",
+  "maxTasks": 5,
+  "topics": [
+    {
+      "topicName": "place-order",
+      "lockDuration": 10000
+    }
+  ]
+}
+
+-----------------------------------------------------------------------------------------------------------------------------------
+
+// export const getTaskByProcessInstanceId = async (req, res) => {
+//   try {
+//     const { instanceId } = req.params;
+//     const response = await fetch(`http://localhost:8080/engine-rest/task?processInstanceId=${instanceId}`, {
+//       method: 'GET',
+//       headers: {
+//         'Content-Type': 'application/json'
+//       }
+//     });
+//     const data = await response.json();
+//     return res.status(200).json(data);
+//   } catch (error) {
+//     console.error("Error handling workflow failure:", error);
+//     return res.status(500).json({ message: "Failed to handle workflow failure" });
+//   }
+// }
+
+// export const getTaskByProcessInstanceId = async (req, res) => {
+//   try {
+//     const { instanceId } = req.params;
+//     const data = await getTaskByProcessInstanceId(instanceId);
+//     res.status(200).json(data);
+//   } catch (error) {
+//     res.status(500).json({ message: error.message });
+//   }
+// };
+
+
+
+1. externaltaskId for the instanceId
+2. fetch and lock
+{
+  "workerId": "update-status-to-shipped",
+  "maxTasks": 5,
+  "usePriority": true,
+  "topics": [
+    {
+      "topicName": "update-status-to-shipped",
+      "lockDuration": 10000
+    }
+  ]
+}
+
+3. complete Task
+{
+  "workerId": "update-status-to-shipped"
+}
+http://localhost:8080/engine-rest/external-task/2902d196-6c41-11f0-ab55-28c5c83ea0c7/complete\
+
+
+
+
+
+Packed
+Shipped
+In Transit
+Out for Delivery
+Delivered

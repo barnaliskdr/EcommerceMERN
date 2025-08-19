@@ -17,6 +17,8 @@ import Signup from './pages/Signup';
 import SearchedProducts from './pages/SearchedProducts';
 import Cart from './pages/Cart';
 import Profile from './pages/Profile';
+import ProtectedRoute from './components/ProtectedRoute';
+import UpdateStatus from './pages/UpdateStatus';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import store from './store';
@@ -31,6 +33,16 @@ const router = createBrowserRouter(
       <Route path="products/:name" element={<SearchedProducts />} />
       <Route path="cart" element={<Cart />} />
       <Route path="*" element={<NotFound />} />
+      <Route path="/admin" element={<UpdateStatus />} />
+      {/* <Route path="/admin" element={<UpdateStatus/>}/> */}
+      {/* <Route
+      path="/admin"
+      element={
+        <ProtectedRoute allowedRoles={['admin', 'manager']}>
+          <UpdateStatus />
+        </ProtectedRoute>
+      }
+      /> */}
     </Route>
   )
 );

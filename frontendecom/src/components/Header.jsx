@@ -9,6 +9,7 @@ import {FaShoppingCart,FaUser} from 'react-icons/fa';
 import { GoSignOut } from "react-icons/go";
 import { FaHome } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
+import { IoMdNotifications } from "react-icons/io";
 import logo from '../assets/logo.png';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -75,8 +76,11 @@ const Header = () => {
           <Nav.Link as={Link} to="/">
               <FaHome/>Home
             </Nav.Link>
-            <Nav.Link as={Link} to="/cart">
-                <FaShoppingCart/>cart
+            <Nav.Link as={Link} to="/cart" style={{ position: 'relative' }}>
+                <FaShoppingCart/>
+                {/* Badge */}
+               
+                cart
             </Nav.Link>
             { userData!=null ? 
             <>
@@ -86,6 +90,12 @@ const Header = () => {
             <Nav.Link as={Link} to="/profile">
                 <CgProfile/>{userData.name}
             </Nav.Link>
+            {(userData.role === 'admin' || userData.role === 'manager') && (
+            <>
+            <Nav.Link as={Link} to="/admin">
+                <FaUser/>Admin Operations
+            </Nav.Link>
+            </>)}
             </>
             :
             <Nav.Link as={Link} to="/login">

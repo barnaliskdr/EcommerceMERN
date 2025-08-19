@@ -7,12 +7,25 @@ import productRoutes from "./routes/ProductRoutes.js";
 import UserRoutes from "./routes/UserRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 import orderRoutes from "./routes/OrderRoute.js";
+import http from "http";
+import { Server } from "socket.io";
 import workflowRoutes from "./routes/WorkflowRoutes.js";
 
 const port = 5000;
 connectDB();
 const app = express();
+const server = http.createServer(app);
 
+export const io = new Server(server, {
+  cors: {
+    origin: "http://localhost:3000", // React frontend
+    methods: ["GET", "POST"]
+  }
+});
+
+io.on("connection", (socket) => {
+  console.log("⚡ Client connected:", socket.id);
+});
 
 app.use(cors(
     // {
@@ -26,7 +39,7 @@ app.use('/api/auth',UserRoutes);
 app.use('/api/auth',authRoutes);
 app.use('/api/products',productRoutes);
 app.use('/api/orders',orderRoutes);
-app.use('/api/camunda',workflowRoutes);
+app.use('/api/workflow',workflowRoutes);
 app.get("/", (req, res) => {
     res.send("Hello World!");
     // res.json(products);
@@ -47,7 +60,7 @@ app.get("/", (req, res) => {
 // })
 
 
-app.listen(port,()=>
+server.listen(port,()=>
 {
     console.log(`Server running on port ${port}`);
 })

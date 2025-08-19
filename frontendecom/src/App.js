@@ -15,20 +15,22 @@ import Cart from './pages/Cart';
 import { Outlet } from 'react-router-dom';
 
 function App() {
+  
   return (
     <div className="d-flex flex-column vh-100">
       <ToastContainer 
       position="top-right" 
-      autoClose={5000} 
-      hideProgressBar={true} 
+      autoClose={2000} 
+      hideProgressBar={false} 
       newestOnTop={false} 
       theme="dark"
-      closeOnClick rtl={false}/>
+      closeOnClick rtl={true}/>
       <header className="flex-shrink-0">
         <Header />
       </header>
 
       <main className="flex-grow-1 overflow-auto">
+        
         <Outlet />
       </main>
 
@@ -40,7 +42,10 @@ function App() {
 }
 
 export default App;
-// export default App;
+
+
+
+
 // import React, { useState, useEffect } from "react";
 // import "./Style.scss";
 // import { ToastContainer } from "react-toastify";

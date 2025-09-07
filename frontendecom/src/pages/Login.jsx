@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import Loginpage from '../assets/loginpage.png';
 import { login } from '../actions/loginActions';
 import "./Login.scss";
+import { toast } from "react-toastify";
 
 const Login = () => {
    const navigate = useNavigate();
@@ -16,6 +17,7 @@ const Login = () => {
   const [email, setEmail] = useState("");  
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
+  const [error, setError] = useState("");
   const [password, setPassword] = useState("");
 
   const handleEmail = (e) => {
@@ -34,26 +36,8 @@ const Login = () => {
     setPassword(e.target.value);
   }
 
-  // const handleLogin = async(e) => {
-  //   try
-  //   {
-  //     console.log("inside try block of signup");
-  //     const resp = await axios.post("http://localhost:5000/api/auth/login", {
-  //       name: name,
-  //       email: email,
-  //       password: password
-  //     })
-  //     console.log("resp-->",resp);
-  //     navigate("/");
-  //   }
-  //   catch(err)
-  //   {
-  //     console.log("error-->",err);
-  //   }
-  // }
-
   const handleLogin = async (e) => {
-    dispatch(login(name, email, password, navigate));
+    dispatch(login(name, email, password, navigate, setError));
    // dispatch(addToCart(product));
   }
 
@@ -62,7 +46,7 @@ const Login = () => {
       <div class="h-30 w-30">
         <img src={Loginpage} alt="milkyway" style={{width:"100%", height:"100%"}} />
       </div>
-   
+      {error && toast.error(error)}
       <Form classname="p-4" style={{border:"1px solid black", borderColor:"black",padding: "4rem",paddingBottom:"2rem", paddingRight:"6rem"}}>
        <h1 className="translate-middle-y text-center">Login</h1>
       <Form.Control

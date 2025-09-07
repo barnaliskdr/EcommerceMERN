@@ -34,12 +34,14 @@ import { cartReducer } from './reducers/CartReducer';
 import { loginReducer } from './reducers/LoginReducer';
 import { orderReducer } from './reducers/OrderReducer';
 import workflowReducer from './reducers/workflowReducer';
+import { wishListReducer } from './reducers/WishlistReducer';
 
 const rootReducer = combineReducers({
   cart: cartReducer,
   login: loginReducer,
   order: orderReducer,
-  workflow: workflowReducer
+  workflow: workflowReducer,
+  wishlist: wishListReducer
 });
 
 const store = createStore(

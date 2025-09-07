@@ -5,13 +5,6 @@ import HomePage from './pages/HomePage';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import { ToastContainer, toast } from 'react-toastify';
-import { Navigate,useRoutes } from 'react-router-dom';
-// import { BrowserRouter , Route, Routes } from 'react-router-dom';
-import NotFound from './pages/NotFound';
-import Login from './pages/Login';
-import Signup from './pages/Signup';
-import SearchedProducts from './pages/SearchedProducts';
-import Cart from './pages/Cart';
 import { Outlet } from 'react-router-dom';
 
 function App() {
@@ -30,7 +23,6 @@ function App() {
       </header>
 
       <main className="flex-grow-1 overflow-auto">
-        
         <Outlet />
       </main>
 

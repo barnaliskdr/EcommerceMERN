@@ -30,6 +30,15 @@ export const loginReducer = (state = initialState, action) => {
                 loading: false,
                 error: action.payload
             };
+
+        case "LOGOUT_SUCCESS":
+            return{
+                ...state,
+                isLoggedIn: false,
+                userData: null,
+                error: null,
+                loading: false
+            }
         default:
             return state;
     }

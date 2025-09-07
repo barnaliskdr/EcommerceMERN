@@ -15,7 +15,7 @@ const UpdateStatus = () => {
     const dispatch = useDispatch();
     const allOrders = useSelector((state) => state.order.orders); // Assuming you have a reducer that manages orders
     // console.log("allOrders from-->",allOrders);
-
+    console.log("allorders length-->", allOrders.length);
     useEffect(() => {
         dispatch(getAllOrdersAction()); // Call the action creator as a function
 
@@ -24,16 +24,14 @@ const UpdateStatus = () => {
     // 🔔 Listen for "newOrder" event
     socket.on("newOrder", (order) => {
         console.log("🔔 New order received:", order);
-        toast.success(`New Order: ${order._id}`, {
-            position: "right-top",
-            autoClose: 5000});
+        toast.success(`New Order: ${order._id}`);
         dispatch(getAllOrdersAction());
     });
 
     return () => {
       socket.disconnect(); // cleanup on unmount
     };
-    }, []);
+    }, [dispatch]); // Add allOrders.length to the dependency array
 
     const [activeTab, setActiveTab] = useState('Pending');
 
@@ -68,13 +66,23 @@ const UpdateStatus = () => {
     const cancelOrder = async (order) => {
         console.log("order in cancelOrder", order);
         // dispatch(deleteOrder(order._id));
-        const response = await fetch(`http://localhost:5000/api/orders/deleteorder`, {
+        try{
+            const response = await fetch(`http://localhost:5000/api/orders/deleteorder`, {
             method: 'DELETE',
             body: JSON.stringify({ orderId: order._id }),
             headers: {  
                 'Content-Type': 'application/json'  
             }
-        });
+            });
+
+            toast.info("Order cancelled successfully");
+            dispatch(getAllOrdersAction()); 
+        }
+        catch(error) 
+        {
+            console.error("Error cancelling order:", error);
+            toast.error("Failed to cancel order");  
+        }
     }
 
     const completeStatus = async(order) => {
@@ -127,8 +135,10 @@ const UpdateStatus = () => {
                 })
             });
 
+            toast.info("Order status changed successfully");
+            setActiveTab(signal); // Switch to the next tab(auto-switch/refresh tab if the status moves)
+            dispatch(getAllOrdersAction()); 
             console.log("Response from updateStatusToDB:", updateStatusResponse);
-            dispatch(getAllOrdersAction());
         }
         catch(error) {
             console.error("Error completing status:", error);
@@ -178,20 +188,6 @@ const UpdateStatus = () => {
                                          <Button variant="outline-light" onClick={() => cancelOrder(order)}>Cancel Order</Button>
                                          </>)}
                                     </div>
-                                    {/* <div>
-                                        <label htmlFor={`status-${order._id || order.id}`}>Change Status: </label>
-                                        <select
-                                            id={`status-${order._id || order.id}`}
-                                            value={order.status}
-                                            onChange={(e) => handleStatusChange(order._id || order.id, e.target.value)}
-                                        >
-                                            {statusList.map((status) => (
-                                                <option key={status} value={status}>
-                                                    {status}
-                                                </option>
-                                            ))}
-                                        </select>
-                                    </div> */}
                                 </div>
                             </Card>
                         </div>

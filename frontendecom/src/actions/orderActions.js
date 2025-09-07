@@ -1,4 +1,4 @@
-import { placeOrder, getAllOrders } from "../services/Orderservices";
+import { placeOrder, getAllOrders, getOrdersByUserFromService} from "../services/Orderservices";
 import { toast } from "react-toastify";
 
 
@@ -114,3 +114,28 @@ export const getAllOrdersAction = () => {
 //     };
 
 // }
+
+
+export const getAllOrdersByUser = (userId) =>
+{
+    return async (dispatch) => {
+        dispatch({
+                type: "USER_ORDERS"
+            });
+        try {
+            const userOrdersdata = await getOrdersByUserFromService(userId);
+            console.log("User orders fetched successfully:", userOrdersdata);
+            dispatch({
+                type: "GET_USER_ORDERS_SUCCESS",
+                payload: userOrdersdata
+            });
+        } catch (error) {
+            console.error("Error fetching user orders:", error);
+            dispatch({
+                type: "GET_USER_ORDERS_FAILURE",
+                payload: error
+            });
+            throw new Error("Failed to fetch user orders: " + error);
+        }
+    };
+}

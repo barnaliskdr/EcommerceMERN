@@ -3,11 +3,43 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import ItemsTable from './ItemsTable';
 import { Table } from 'react-bootstrap';
+import { Box } from "@mui/material";
+import Stepper from '@mui/material/Stepper';
+import Step from '@mui/material/Step';
+import StepLabel from '@mui/material/StepLabel';
+
 
 const CustomModal = (props) => {
 
   console.log("props: ",props);
  const handleClose = () => props.setShowModal(false);
+
+ function prettifyStatus(status) {
+  if (!status) return '';
+  if (status === 'Pending') return 'Order Placed';
+  if (status === 'OUT_FOR_DELIVERY') return 'Out for Delivery';
+  if (status === 'SHIPPED') return 'Shipped';
+  if (status === 'DELIVERED') return 'Delivered';
+  // fallback for any other status
+  return status
+    .toLowerCase()
+    .split('_')
+    .map((word, idx) => idx === 0 ? word.charAt(0).toUpperCase() + word.slice(1) : word)
+    .join(' ');
+}
+
+  const steps = [
+  'Order Placed',
+  'Shipped',
+  'Out for Delivery',
+  'Delivered'
+  ];
+
+  let currentStatus = props.orderDetails ? props.orderDetails.orderStatus : null;
+  currentStatus = prettifyStatus(currentStatus);
+
+  console.log("currentStatus:", currentStatus);
+  let activeStep = steps.indexOf(currentStatus);
 
   return (
     // <Modal
@@ -24,14 +56,14 @@ const CustomModal = (props) => {
          onHide={() => props.setShowModal(false)}
          dialogClassName="modal-90w p-3"
         //  style={{ backgroundColor: 'rgba(44, 120, 219, 0.67)' }}
-         fullscreen='sm-down'
+         fullscreen={props.fullScreen || 'sm-down'} 
          centered
          size="lg"
          aria-labelledby="example-custom-modal-styling-title"
          backdrop={false}
     >
-      <Modal.Header closeButton>
-        <Modal.Title>Modal title</Modal.Title>
+      <Modal.Header style={{ backgroundColor: '#0d6efd'}}closeButton>
+        <Modal.Title>Order Details</Modal.Title>
       </Modal.Header>
       <Modal.Body>
           {/* {props.orderDetails.orderItems.map((product, idx) => (
@@ -68,12 +100,35 @@ const CustomModal = (props) => {
           </tbody>
         </Table> */}
         <ItemsTable items={props.orderDetails.orderItems} />
+        <h2>Current Status</h2>
+        <Box sx={{ padding: '2rem', backgroundColor:"pink", borderRadius:"8px", marginTop:"2rem", marginBottom:"2rem" }}>
+        {props.showWorkflow &&  (
+          <>
+             <Box sx={{ width: '100%' }}>
+              <Stepper activeStep={activeStep} alternativeLabel>
+                {steps.map((label) => (
+                  <Step key={label}>
+                    <StepLabel>{label}</StepLabel>
+                  </Step>
+                ))}
+              </Stepper>
+            </Box>
+          </>
+        )}
+        </Box>
+        <Box>
+          <h5>Delivery Address:</h5>
+          <p>{props.orderDetails.DeliveryAddress.address}, {props.orderDetails.DeliveryAddress.city}, {props.orderDetails.DeliveryAddress.country}</p>
+          <h5>Total Amount:</h5>
+          <p>${props.orderDetails.total}</p>
+          <span><h5>Payment Method:</h5><p>{props.orderDetails.paymentMethod}</p></span>
+          
+        </Box>
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleClose}>
           Close
         </Button>
-        <Button variant="primary">Understood</Button>
       </Modal.Footer>
     </Modal>
   )

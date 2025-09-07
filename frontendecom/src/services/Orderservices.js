@@ -62,3 +62,17 @@ export const getAllOrders = async() => {
         throw new Error("Failed to fetch all orders: " + error);
     }
 }
+
+
+export const getOrdersByUserFromService = async(userId) => {
+    try{
+            const response = await fetch(`http://localhost:5000/api/orders/user/${userId}`);
+            console.log("response-->", response);
+            return response.json();
+    }
+    catch(error)
+    {
+        console.error("Error fetching user orders:", error);
+        throw new Error("Failed to fetch user orders: " + error);
+    }   
+}

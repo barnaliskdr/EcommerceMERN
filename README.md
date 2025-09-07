@@ -1,17 +1,19 @@
 # EcommerceMERN
 
 {
-    "email": "priya@gmail.com",
-    "name": "Priya Chatterjee",
-    "password": "priyaa@1234"
+    "email": "sneha@gmail.com",
+    "name": "Sneha Chatterjee",
+    "password": "snehaa@1234",
+    "phone": "6585407489",
+    "role": "admin"
 }
 
 
 {
-    "email": "pooja@gmail.com",
-    "name": "Pooja Gomes",
-    "password": "pooja@1234",
-    "phone": "9348938743",
+    "email": "pritha@gmail.com",
+    "name": "Pritha Gomes",
+    "password": "pritha@1234",
+    "phone": "6445407489",
     "role": "customer"
 }
 
@@ -20,7 +22,7 @@
     "email": "Sreetama@gmail.com",
     "name": "Sreetama Ray",
     "password": "sree@1234",
-    "phone": "9908938743",
+    "phone": "8908938743",
     "role": "manager"
 }
 
@@ -49,3 +51,39 @@ Atlas atlas-5fna4v-shard-0 [primary] Ecommerceshop> db.orders.deleteMany({});
 { acknowledged: true, deletedCount: 39 }
 
 db.orders.deleteOne({ _id: ObjectId("your-order-id-here") });
+
+
+//index got created for an non-required field. fixed that with:
+
+
+Atlas atlas-5fna4v-shard-0 [primary] Ecommerceshop> db.carts.dropIndex("user_1")
+{
+  nIndexesWas: 2,
+  ok: 1,
+  '$clusterTime': {
+    clusterTime: Timestamp({ t: 1756842657, i: 2 }),
+    signature: {
+      hash: Binary.createFromBase64('CVboGSDIzRHMXw/Xupn4SW1TuHI=', 0),
+      keyId: Long('7512550060207374342')
+    }
+  },
+  operationTime: Timestamp({ t: 1756842657, i: 2 })
+}
+
+
+
+
+
+Cart and User Flow:
+
+user logs in, 
+tries to add item to the cart
+cart gets created and mapped to user in cart model
+cart status set to active and user adds items into it
+user places order, orderId mapped to cartId in placeOrder api, into cart model
+cart statusupdated to order_in_progress
+order delivered
+cart status changed to completed and saved in db
+
+repeats....
+

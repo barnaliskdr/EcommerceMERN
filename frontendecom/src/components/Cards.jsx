@@ -1,178 +1,101 @@
-// import React,{useState, useEffect} from 'react'
-// import Card from 'react-bootstrap/Card';
-// import ListGroup from 'react-bootstrap/ListGroup';
-// import { Container, Row, Col, Button } from "react-bootstrap";
-// import Singleproduct from './Singleproduct';
-// import { getProductDetails } from '../services/Homeservices';
-// import { Mockdata } from '../Mockdata';
-
-
-// const Cards = ({productType}) => {
-//     const [visible, setVisible] = useState(false);
-//     const [selectedProduct, setSelectedProduct] = useState(null);
-//     const [rating, setRating] = useState(0);
-//     const [products, setProducts] = useState([]);
-//     const viewDetailsHandle = (product) => {
-//         setSelectedProduct(product);
-//         setVisible(true);
-//       }
-//       useEffect(() => {
-//         // const fetchProducts = async () => {
-//         //   try {
-//         //     const productDetails = await getProductDetails();
-//         //     setProducts(productDetails);
-//         //   } catch (error) {
-//         //     console.log(error);
-//         //   }
-//         // };
-//         // fetchProducts();
-//         setProducts(Mockdata);
-//       }, []);
-//       const specifyTypes = (productType) => {
-
-//         console.log(productType);
-//         switch(productType) {
-//           case "Fruits":
-//             return products.filter((product) => product.category === "Fruits");
-//           case "Vegetables":
-//             return products.filter((product) => product.category === "Vegetables");
-//           case "Dairy":
-//             return products.filter((product) => product.category === "Dairy");
-//           case "Bakery":
-//             return products.filter((product) => product.category === "Bakery");
-//           case "Spices":
-//             return products.filter((product) => product.category === "Spices");
-//           case "Frozen":
-//             return products.filter((product) => product.category === "Frozen");
-//           case "Grain":
-//             return products.filter((product) => product.category === "Grain");
-//           default:
-//             return products;
-//         }
-//       };
-
-//       const filteredProducts = specifyTypes(productType);
-//   return (
-//     <>
-//     {console.log(filteredProducts)}
-//         {/* {products.map((product)=>{ */}
-//         {filteredProducts.map((product) => (
-//           <Container className="d-grid gap-4 d-flex flex-row justify-content-center flex-wrap m-3">
-//           <Card style={{ width: '18rem' }} className="p-2">
-//             <Card.Img variant="top" src={product.image}></Card.Img>
-//                  <Card.Body>
-//               <Card.Title>{product.name}</Card.Title>
-//               <Card.Text>
-//                 Product Type: {product.category}
-//               </Card.Text>
-//               <Card.Text>
-//                 Stock Available: {product.quantity}
-//               </Card.Text>
-//               <Card.Text>
-//                 Price: {product.price}
-//               </Card.Text>
-//               <Card.Text>
-//                 Company: {product.brand}
-//               </Card.Text>
-//               {/* <Card.Text>
-//                 Rating:
-//                 <span className="RatingStyle">
-//                 <Rating readOnly style={{ maxWidth: 20}} value={rating} onChange={setRating} itemStyles={myStyles} /></span>
-//               </Card.Text> */}
-//             </Card.Body>
-//             <Button className="bg-light border border-info text-dark m-2" onClick= {()=>viewDetailsHandle(product)}>View Details</Button>
-//             <div className="d-flex justify-content-center align-items-center w-5 h-4 bg-info text-white m-3">
-//               <Button variant="outline-primary text-white">-</Button>
-//               <span className="px-2">Add To Cart</span>
-//               <Button variant="outline-primary text-white">+</Button>
-//             </div>
-//           </Card>
-//         </Container>
-//         ))}
-          
-//       {selectedProduct && <Singleproduct product={selectedProduct} setVisible={setVisible} visible={visible}/>}
-        
-//       </>
-//   )
-// }
-
-// export default Cards
-
 import React, { useState, useEffect } from 'react';
-import Card from 'react-bootstrap/Card';
-import { Container, Button } from 'react-bootstrap';
-import './Cards.scss';
-import Singleproduct from './Singleproduct';
-// import { Mockdata } from '../Mockdata';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Grid';
+import Button from '@mui/material/Button';
 import { useDispatch, useSelector } from 'react-redux';
-// import { useGetProductsQuery } from '../slices/productsApiSlice';
-// import { useGetAddToCartQuery } from '../slices/cartSlices';
 import Rating from './Rating';
 import { toast } from 'react-toastify';
-// import { addToCart, removeFromCart } from '../slices/cartSlices';
-import { addToCart,removeFromCart } from '../actions/cartActions';
-import CustomToast from './CustomToast';
+import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
+import { addToWishList, removeFromWishList, getAllWishList } from '../actions/WishListActions.js';
+import { addToCart, removeFromCart } from '../actions/cartActions';
+import Singleproduct from './Singleproduct';
 
 const Cards = ({ productType }) => {
+
   const [visible, setVisible] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [products, setProducts] = useState([]);
   const [showToast, setShowToast] = useState(false);
-  const productsAdded  = useSelector((state)=> state);
-  //const [productData, setProductData] = useState([]); 
-  //const {data: products, isloading, isError} = useGetProductsQuery(); //reduxtoolkit
+  const [wishlistedItems, setWishlistedItems] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 4;
   const dispatch = useDispatch();
-  const userData = useSelector((state) => state.login.userData);
+  const userData = sessionStorage.getItem("token");
+  const userId = sessionStorage.getItem("id");
+  const wishlist = useSelector((state) => state.wishlist);
+  console.log("Hii wishList:", wishlist);
 
+  useEffect (() => {
+    dispatch((getAllWishList(userId))); 
+    // setWishlistedItems(wishlist);
+  },[])
+  const wishlistHandler = (product) => {
+    setWishlistedItems((prev) =>{
+      if(prev.includes(product._id))
+      {
+            if(userData){
+
+             toast.info("Product removed from Wishlist");
+             dispatch(removeFromWishList(product, userId));
+             return prev.filter((id) => id !== product._id);
+            }
+            else
+            {
+              toast.info("Please login to add items to wishlist");
+            }
+      } // remove if already wishlisted
+      else
+      {
+        if(userData){
+        toast.info("Product added to Wishlist");
+        dispatch(addToWishList(product._id, userId));
+        return [...prev, product._id];
+        }// add if not wishlisted
+        else{
+          toast.info("Please login to remove items from wishlist");
+        }
+      }
+    })
+  };
 
   const viewDetailsHandle = (product) => {
     setSelectedProduct(product);
     setVisible(true);
   };
 
-
   const handleAddToCart = (product) => {
-    //console.log("called Add to cart",product);
-    if(userData !== null)
-    {
-      dispatch(addToCart(product));
-    }
-    else
-    {
+    if (userData !== null) {
+      dispatch(addToCart(userId,product));
+    } else {
       setShowToast(true);
       toast.info("Please login to add items to cart");
     }
   };
 
   const handleRemoveFromCart = (product) => {
-   // console.log("called Remove from cart",product);
-    dispatch(removeFromCart(product));
+    dispatch(removeFromCart(userId,product));
   };
 
-  const getAllProducts = async() =>
-  {
-    try{
-        const response = await fetch('http://localhost:5000/api/products')
-        const data = await response.json(); // Await the JSON parsing
-        console.log(data); // This will show your actual products
-        setProducts(data); 
+  const getAllProducts = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/api/products');
+      const data = await response.json();
+      setProducts(data);
+    } catch (err) {
+      console.log(err);
     }
-    catch(err)
-    {
-        console.log(err);
-    }  
-  }
+  };
 
   useEffect(() => {
     getAllProducts();
-  }, []); 
+  }, []);
 
   const specifyTypes = (productType) => {
-
     if (!products) return [];
-
     switch (productType) {
       case 'Fruits':
         return products.filter((product) => product.category === 'Fruits');
@@ -189,9 +112,7 @@ const Cards = ({ productType }) => {
       case 'Grain':
         return products.filter((product) => product.category === 'Grain');
       case 'Dairy Alternatives':
-        return products.filter(
-          (product) => product.category === 'Dairy Alternatives'
-        );
+        return products.filter((product) => product.category === 'Dairy Alternatives');
       default:
         return products;
     }
@@ -222,9 +143,10 @@ const Cards = ({ productType }) => {
     for (let i = 1; i <= totalPages; i++) {
       pageNumbers.push(
         <Button
+          variant={currentPage === i ? "contained" : "outlined"}
           key={i}
+          sx={{ mx: 0.5, minWidth: 36 }}
           onClick={() => handlePageClick(i)}
-          className={`mx-1 ${currentPage === i ? 'active' : ''}`}
         >
           {i}
         </Button>
@@ -233,52 +155,128 @@ const Cards = ({ productType }) => {
     return pageNumbers;
   };
 
+  // return (
+  //   <>
+  //     <Box sx={{ flexGrow: 1, py: 3 }}>
+  //       <Grid container spacing={3} justifyContent="center">
+  //         {currentItems.map((product) => (
+  //           <Grid item xs={12} sm={6} md={4} lg={3} key={product.id}>
+  //             <Card sx={{ width: '100%', minHeight: 350, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+  //               <CardMedia
+  //                 component="img"
+  //                 height="160"
+  //                 image={product.image}
+  //                 alt={product.name}
+  //                 sx={{ objectFit: 'contain', p: 2 }}
+  //               />
+  //               <CardContent>
+  //                 <Typography gutterBottom variant="h6" component="div">{product.name}</Typography>
+  //                 <Typography>Price: ${product.price}</Typography>
+  //                 <Typography variant="body2" color="text.secondary">
+  //                   <Rating value={product.rating} />
+  //                 </Typography>
+  //               </CardContent>
+  //               <CardActions sx={{ justifyContent: "space-between", flexWrap: "wrap" }}>
+  //                 <Button
+  //                   variant="outlined"
+  //                   size="small"
+  //                   onClick={() => viewDetailsHandle(product)}
+  //                 >
+  //                   View Details
+  //                 </Button>
+  //                 <Button
+  //                   variant="outlined"
+  //                   size="small"
+  //                   color={wishlisted ? "error" : "primary"}
+  //                   onClick={() => wishlistHandler(product)}
+  //                   startIcon={wishlisted ? <IoMdHeart /> : <IoMdHeartEmpty />}
+  //                 >
+  //                   Add to Wishlist
+  //                 </Button>
+  //                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+  //                   <Button variant="outlined" size="small" onClick={() => handleRemoveFromCart(product)}>-</Button>
+  //                   <Typography variant="body2" sx={{ px: 1 }}>Add To Cart</Typography>
+  //                   <Button variant="outlined" size="small" onClick={() => handleAddToCart(product)}>+</Button>
+  //                 </Box>
+  //               </CardActions>
+  //             </Card>
+  //           </Grid>
+  //         ))}
+  //       </Grid>
+  //     </Box>
+  //     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', my: 2 }}>
+  //       <Button
+  //         variant="outlined"
+  //         onClick={handlePreviousPage}
+  //         disabled={currentPage === 1}
+  //         sx={{ mx: 1 }}
+  //       >
+  //         Previous
+  //       </Button>
+  //       {renderPageNumbers()}
+  //       <Button
+  //         variant="outlined"
+  //         onClick={handleNextPage}
+  //         disabled={currentPage === totalPages}
+  //         sx={{ mx: 1 }}
+  //       >
+  //         Next
+  //       </Button>
+  //     </Box>
+  //     {selectedProduct && (
+  //       <Singleproduct
+  //         product={selectedProduct}
+  //         setVisible={setVisible}
+  //         visible={visible}
+  //       />
+  //     )}
+  //   </>
+  // );
+
   return (
-    <>
-      <Container className="d-grid gap-4 d-flex flex-row justify-content-center flex-wrap m-3">
-        {currentItems.map((product) => (
-          <Card style={{ width: '18rem' }} className="p-2" key={product.id}>
-            <Card.Img variant="top" src={product.image} className="card-img-custom"></Card.Img>
-            <Card.Body style={{height: "4rem"}}>
-              <Card.Title>{product.name}</Card.Title>
-              <Card.Text>Price: {product.price}$</Card.Text>
-              <Card.Text as="div">
-                <Rating value={product.rating}/>
-              </Card.Text>
-            </Card.Body>
-            <Button
-              className="bg-light border border-info text-dark m-1"
-              onClick={() => viewDetailsHandle(product)}
-            >
-              View Details
-            </Button>
-            <div className="d-flex justify-content-center align-items-center w-5 h-4 bg-info text-white m-2">
-              <Button variant="outline-primary text-white" onClick={() => handleRemoveFromCart(product)}>-</Button>
-              <span className="px-2">Add To Cart</span>
-              <Button variant="outline-primary text-white" onClick={() => handleAddToCart(product)}>+</Button>
+  <>
+    <div className="d-flex flex-wrap justify-content-center m-4 gap-5">
+      {currentItems.map((product) => (
+        <Card>
+          <CardMedia
+            sx={{ height: 140 }}
+            image={product.image}
+            title={product.name}
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div">
+              {product.name}
+            </Typography>
+            <Typography>Price: ${product.price}</Typography>
+            <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+              <Rating value={product.rating} />
+            </Typography>
+          </CardContent>
+          <CardActions>
+            <div className="d-flex justify-content-center align-items-center gap-2 small">
+              <Button
+                className="bg-light border text-dark w-3"
+                size="small"
+                onClick={() => viewDetailsHandle(product)}
+              >
+                View Details
+              </Button>
+              <Button
+                className="bg-light border text-dark w-3"
+                size="small"
+                onClick={() => wishlistHandler(product)}>
+                {wishlistedItems.includes(product._id) ? <IoMdHeart /> : <IoMdHeartEmpty />}
+                Add to Wishlist
+              </Button>
             </div>
-          </Card>
-        ))}
-      </Container>
-      <div className="d-flex justify-content-center my-4">
-        <Button
-          variant="primary"
-          onClick={handlePreviousPage}
-          disabled={currentPage === 1}
-          className="mx-2"
-        >
-          Previous
-        </Button>
-        {renderPageNumbers()}
-        <Button
-          variant="primary"
-          onClick={handleNextPage}
-          disabled={currentPage === totalPages}
-          className="mx-2"
-        >
-          Next
-        </Button>
-      </div>
+          </CardActions>
+          <CardActions>
+            <Button sx={{ fontSize: '1.5rem'}} size="small" onClick={() => handleRemoveFromCart(product)}>-</Button>
+                <span className="px-2">Add To Cart</span>
+            <Button sx={{ fontSize: '1.5rem'}} size="small" onClick={() => handleAddToCart(product)}>+</Button>               
+          </CardActions>
+        </Card>
+      ))}
       {selectedProduct && (
         <Singleproduct
           product={selectedProduct}
@@ -286,8 +284,28 @@ const Cards = ({ productType }) => {
           visible={visible}
         />
       )}
-    </>
-  );
+    </div>
+    <div className="d-flex justify-content-center align-items-center small my-3">
+      <Button
+        variant="light"
+        onClick={handlePreviousPage}
+        disabled={currentPage === 1}
+        style={{ border: '1px solid lightgrey', borderRadius: '0px' }}
+      >
+        Previous
+      </Button>
+      {renderPageNumbers()}
+      <Button
+        variant="light"
+        onClick={handleNextPage}
+        disabled={currentPage === totalPages}
+        style={{ border: '1px solid lightgrey', borderRadius: '0px' }}
+      >
+        Next
+      </Button>
+    </div>
+  </>
+);
 };
 
 export default Cards;

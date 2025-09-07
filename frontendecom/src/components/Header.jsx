@@ -3,15 +3,19 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
+import {BadgeNav} from 'react-bootstrap';
 import Nav from 'react-bootstrap/Nav';
+import Badge from "react-bootstrap/Badge";
 import Navbar from 'react-bootstrap/Navbar';
 import {FaShoppingCart,FaUser} from 'react-icons/fa';
 import { GoSignOut } from "react-icons/go";
 import { FaHome } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
+import { IoMdHeart } from "react-icons/io"; // Import IoMdHeart
 import { IoMdNotifications } from "react-icons/io";
 import logo from '../assets/logo.png';
 import { Link } from 'react-router-dom';
+import { logout } from '../actions/loginActions';
 import { useSelector } from 'react-redux';
 import { Form, FormControl, Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
@@ -23,6 +27,13 @@ const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [productName, setProductName] = useState('');
+  const userData = useSelector((state) => state.login.userData);
+  const userName = sessionStorage.getItem("name");
+  const userRole = sessionStorage.getItem("role");
+  const allcart = useSelector(state => state.cart.allCart);
+  const renderCart = allcart.filter(cart => cart.status === "active");
+  const cartItemCount = renderCart.length;
+
   //const {data: products, isloading, isError} = useGetProductByNameQuery();
   //const [trigger, { data: product, isLoading, isError }] = useLazyGetProductByNameQuery(); // useLazyQuery hook
 
@@ -33,16 +44,10 @@ const Header = () => {
   }
 
   const handleLogout = () => {
-    // localStorage.removeItem("userData");
-    // localStorage.removeItem("token");
-    //dispatch(logout());
+    dispatch(logout());
     navigate("/");
   }
 
-  // useEffect(() => {
-   
-  //   {productName? console.log(products): ""}
-  // },[productName])
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -54,9 +59,6 @@ const Header = () => {
     
   }
 
-  const userData = useSelector((state) => state.login.userData);
-
-  // console.log("products---",product);
   
   return (
     <header>
@@ -77,20 +79,27 @@ const Header = () => {
               <FaHome/>Home
             </Nav.Link>
             <Nav.Link as={Link} to="/cart" style={{ position: 'relative' }}>
-                <FaShoppingCart/>
-                {/* Badge */}
-               
-                cart
+                { cartItemCount > 0 && (
+                  <Badge
+                    badgeContent={cartItemCount}
+                    color="error"
+                    showZero={false} // hides badge when cart is empty
+                  >
+                    <FaShoppingCart/>
+                  </Badge>
+                )}
             </Nav.Link>
-            { userData!=null ? 
+            
+            { userName!=null ? 
             <>
             <Nav.Link as={Link} to="/login" onClick={handleLogout}>
                 <GoSignOut/>Sign Out
             </Nav.Link>
             <Nav.Link as={Link} to="/profile">
-                <CgProfile/>{userData.name}
+                <CgProfile/>{userName}
             </Nav.Link>
-            {(userData.role === 'admin' || userData.role === 'manager') && (
+            <Nav.Link as={Link} to="/wishlist" style={{ position: 'relative' }}><IoMdHeart />WishList</Nav.Link>
+            {(userRole === 'admin' || userRole === 'manager') && (
             <>
             <Nav.Link as={Link} to="/admin">
                 <FaUser/>Admin Operations

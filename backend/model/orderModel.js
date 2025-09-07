@@ -38,6 +38,11 @@ const orderSchema = new mongoose.Schema({
             }
         }
     ],
+    cart:{
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'Cart'
+    },
     DeliveryAddress: 
     {
         address: {

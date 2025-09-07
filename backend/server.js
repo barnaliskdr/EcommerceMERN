@@ -7,6 +7,7 @@ import productRoutes from "./routes/ProductRoutes.js";
 import UserRoutes from "./routes/UserRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 import orderRoutes from "./routes/OrderRoute.js";
+import cartRoutes from './routes/CartRoute.js';
 import http from "http";
 import { Server } from "socket.io";
 import workflowRoutes from "./routes/WorkflowRoutes.js";
@@ -39,6 +40,7 @@ app.use('/api/auth',UserRoutes);
 app.use('/api/auth',authRoutes);
 app.use('/api/products',productRoutes);
 app.use('/api/orders',orderRoutes);
+app.use('/api/carts',cartRoutes);
 app.use('/api/workflow',workflowRoutes);
 app.get("/", (req, res) => {
     res.send("Hello World!");

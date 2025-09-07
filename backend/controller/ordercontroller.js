@@ -162,8 +162,10 @@ export const getOrdersByuserId = async (req, res) => {
   console.log("userid param:", req.params.userid); 
 
   try{
-    const  userId = req.params.userid;
-
+    let  userId = req.params.userid;
+    if (userId) {
+      userId = userId.trim(); // Remove whitespace and tabs
+    }
     if (userId  === undefined || userId === null) {
       return res.status(400).json({ message: "Missing user ID" });
     }

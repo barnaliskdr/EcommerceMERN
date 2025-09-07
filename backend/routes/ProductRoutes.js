@@ -2,7 +2,7 @@ import express from "express";
 // import ProductController from "../controllers/ProductController.js";
 //import products from '../data/products.js';
 import Product from "../model/productModel.js";
-import { getAllProducts, getProductsByName } from "../controller/productcontroller.js";
+import { getAllProducts, getProductsByName, addToWishList, getAllFromWishlist, removeFromWishList} from "../controller/productcontroller.js";
 
 
 
@@ -24,7 +24,9 @@ const router = express.Router();
 
 router.get("/",getAllProducts);
 router.get("/",getProductsByName);
-
+router.post("/wishlist/add", express.json(), addToWishList);
+router.delete("/wishlist/remove", express.json(), removeFromWishList);
+router.post("/getAllWishlistItems", express.json(), getAllFromWishlist);
 // router.get("/:id", async(req, res) => {
 //     try{
 //     const product = await Product.find(p => p.id === req.params.id);

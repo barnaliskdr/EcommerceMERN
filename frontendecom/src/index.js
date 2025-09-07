@@ -14,10 +14,12 @@ import HomePage from './pages/HomePage';
 import NotFound from './pages/NotFound';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import MyOrders from './pages/MyOrders';
 import SearchedProducts from './pages/SearchedProducts';
 import Cart from './pages/Cart';
+import WishList from './pages/WishList';
 import Profile from './pages/Profile';
-import ProtectedRoute from './components/ProtectedRoute';
+import ProtectedRoute from './ProtectedRoute';
 import UpdateStatus from './pages/UpdateStatus';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
@@ -30,10 +32,12 @@ const router = createBrowserRouter(
       <Route path="login" element={<Login />} />
       <Route path="signup" element={<Signup />} />
       <Route path="profile" element={<Profile/>} />
+      <Route path="wishlist" element={<WishList/>} />
       <Route path="products/:name" element={<SearchedProducts />} />
       <Route path="cart" element={<Cart />} />
       <Route path="*" element={<NotFound />} />
-      <Route path="/admin" element={<UpdateStatus />} />
+      <Route path="my-orders" element={<MyOrders/>} />
+      {/* <Route path="/admin" element={<UpdateStatus />} /> */}
       {/* <Route path="/admin" element={<UpdateStatus/>}/> */}
       {/* <Route
       path="/admin"
@@ -43,6 +47,9 @@ const router = createBrowserRouter(
         </ProtectedRoute>
       }
       /> */}
+      <Route element={<ProtectedRoute allowedRoles={['admin', 'manager']} />}>
+        <Route path="admin" element={<UpdateStatus />} />
+      </Route>
     </Route>
   )
 );
